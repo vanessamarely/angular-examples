@@ -26,5 +26,10 @@ El Temario será el siguiente:
 * CDK
 * Proyecto Tienda
 
+3. Kanban
+
+* Arquitectura
+* Proyecto
+
 
 
