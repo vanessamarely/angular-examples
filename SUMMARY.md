@@ -1,7 +1,8 @@
 # Table of contents
 
 * [Proyectos prácticos con Angular](README.md)
-* [Hola Angular!!](hola-angular.md)
+* [Hola Angular!!](hola-angular/README.md)
+  * [Conceptos Básicos](hola-angular/conceptos-basicos.md)
 
 ## CDK <a id="cdk-1"></a>
 
