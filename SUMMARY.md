@@ -10,5 +10,5 @@
 
 ## Kanban
 
-* [Untitled](kanban/untitled.md)
+* [Kanban Board](kanban/untitled.md)
 
