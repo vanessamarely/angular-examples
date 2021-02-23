@@ -11,5 +11,6 @@
 
 ## Kanban
 
-* [Kanban Board](kanban/untitled.md)
+* [Kanban Board](kanban/untitled/README.md)
+  * [Arquitectura](kanban/untitled/arquitectura.md)
 
