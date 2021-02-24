@@ -40,5 +40,52 @@ Entre el contenedor y el componente de presentación una forma de compartir la d
 
 Son dos componentes los importantes uno en mostrar el contenido y el otro de manejar la data.
 
-  
+###  Porqué necesitamos un estado?
+
+Se tiene un servidor que tiene un valor,  se puede tener las rutas que trae data que se comparte entre ellas, y se muestra esa data en la página. Necesitamos la data proveniente de algún lugar para mostrarla en otro; y el estado es quién se encarga de ayudarnos en la comunicación de esas dos necesidades, se puede decir que es la interface entre los datos y los componentes. Ademas nos ayuda a tener los datos consistentes entre componentes y a mantener la comunicación entre ellos.
+
+###  Tipos de Estados
+
+* Estado del servidor
+
+El estado del servidor es la data en el Backend. Hacemos peticiones de la data  al servidor, mediante puede ser un HttpCliente o una url y hacemos la petición de la data. 
+
+* Estado de la aplicación
+
+El estado de la aplicación es lo que nos ayuda a persistir la data a través de toda la aplicación
+
+* Estado de la página
+
+El estado de la página es lo que solo es necesario en la página.
+
+En este punto llega un gran interrogante, como saber cual debemos usar o como debemos poner la data?
+
+Y debemos hacer una análisis del diseño de nuestra aplicación en este punto nos preguntamos, debo compartir la data en toda la aplicación?, la necesito en ciertas páginas?, cuanto debe durar la persistencia de la data? la comparto en una sesión o debe ser en multiples? 
+
+Tenemos varias opciones para responder a nuestras preguntas anteriores.
+
+* Servicios. usando el patrón singleton, podemos crear un subject, exponemos un observable, donde se pueden subscribir a él, puedo obtener lo que necesito y si necesito hacer un update llamo a un set para que se encargue de la actualización. Todos los que se hayan subscrito obtendrán el estado correspondiente, este método ayuda a mantener una consistencia.
+* Librerías para manejar el estado  \(NGRX, NGXS\)
+* Router o Enrutamiento. Almacena la persistencia de la data, permitiendo que exista en una sesión y también permite compartir paginas o rutas. En el enrutamiento podemos compartir parámetros que usaremos a través de la aplicación.
+* Estado del componente. Smart component se encarga de manejar todo el estado.
+
+### Cómo definimos la arquitectura de nuestra aplicación?
+
+* Analiza los requerimientos. Necesitamos hacer un análisis de lo que se desea hacer, es posible que nuestra aplicación crezca y se deba reestructurar, pero de los requerimientos actuales se debe pensar en crear código, que no posea mucha complejidad, que se pueda escalar y que los nuevos integrantes del equipo puedan entender, para que sean participes activos de la aplicación.
+* Fácil de mantener. Es este punto ayuda mucho el anterior, es bueno pensar en componentes aislados en su lógica, pero aveces de la prisa lo olvidamos, es bueno siempre recordar que la aplicación va a crecer y se debe hacer un alto a tiempo en el código y pensar en una solución que sea entendible y fácil de mantener para todos.
+* Desarrollar funciones o características que  nos ayuden a estructurar la aplicación, donde algunas ayudan al mantenimiento del estado de la aplicación.
+* Se debe definir el alcance del estado, no todos los estados deben ser visibles en toda la aplicación, es bueno aprender a ubicar de acuerdo al tipo de estado su lugar correcto
+* Separar el contenedor de la presentación, se debe definir que componente es solo para mostrar información que no tendrá lógica compleja y cual se encargara de manejar la lógica a mostrar en el presentacional.
+
+
+
+
+
+
+
+
+
+
+
+
 
