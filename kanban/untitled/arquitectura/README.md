@@ -12,5 +12,5 @@ Siguiendo este marco de Angular hay unos conceptos básicos que es fundamental a
 
 Basado en ese marco inicial, en la página oficial podemos encontrar un diagrama, que enseña cómo se relacionan estas piezas básicas y de esta forma vamos armando nuestro rompecabezas.
 
-![](../../.gitbook/assets/68747470733a2f2f616e67756c61722e696f2f67656e6572617465642f696d616765732f67756964652f6172636869746563747572652f6f76657276696577322e706e67.png)
+![](../../../.gitbook/assets/68747470733a2f2f616e67756c61722e696f2f67656e6572617465642f696d616765732f67756964652f6172636869746563747572652f6f76657276696577322e706e67.png)
 
