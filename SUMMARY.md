@@ -11,7 +11,7 @@
 
 ## Kanban
 
-* [Kanban Board](kanban/untitled/README.md)
-  * [Arquitectura](kanban/untitled/arquitectura/README.md)
-    * [Arquitectura de Componentes](kanban/untitled/arquitectura/arquitectura-de-componentes.md)
+* [Kanban Board](kanban/kanban/README.md)
+  * [Arquitectura](kanban/kanban/arquitectura/README.md)
+    * [Arquitectura de Componentes](kanban/kanban/arquitectura/arquitectura-de-componentes.md)
 
