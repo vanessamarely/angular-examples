@@ -41,6 +41,8 @@ En este tablero podremos ir creando nuestras tareas, tendremos 3 listas, una de 
 Tendremos un home, en él podremos ver una lista de nuestras tareas de acuerdo a la prioridad, estas tareas se crearán en la sección tablero donde crearemos nuestras tareas, las podremos mover por nuestras listas y una vez creadas, podemos, en el home revisarlas por categorías.  
 
 
-Usaremos un poco de componentes CDK, así que repasaremos un poco estos.  
+Usaremos un poco de componentes CDK, así que repasaremos un poco estos conceptos.
+
+  
 
 
