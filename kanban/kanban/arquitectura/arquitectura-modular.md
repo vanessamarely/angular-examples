@@ -62,5 +62,7 @@ Teniendo en cuenta nuestro features lo principal de nuestra aplicación seria la
 
 ![](../../../.gitbook/assets/example.png)
 
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-2.12.05-pm.png)
+
 
 
