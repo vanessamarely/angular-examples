@@ -1,8 +1,8 @@
 ---
 description: >-
-  Una aplicación de Angular es un conjunto de legos juntos, y como organizar
-  esos legos,  es la idea la arquitectura que nos ayuda a definir los cimientos
-  de nuestra aplicación, dar orden a esos legos.
+  Una aplicación de Angular es un conjunto de legos juntos, y hay diferentes
+  técnicas que  nos permite usar la arquitectura. Esos legos son los bloques de
+  construcción de Angular.
 ---
 
 # Arquitectura
