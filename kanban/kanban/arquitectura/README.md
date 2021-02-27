@@ -1,5 +1,8 @@
 ---
-description: La arquitectura nos ayuda a definir los cimientos de nuestra aplicación
+description: >-
+  Una aplicación de Angular es un conjunto de legos juntos, y como organizar
+  esos legos,  es la idea la arquitectura que nos ayuda a definir los cimientos
+  de nuestra aplicación, dar orden a esos legos.
 ---
 
 # Arquitectura
