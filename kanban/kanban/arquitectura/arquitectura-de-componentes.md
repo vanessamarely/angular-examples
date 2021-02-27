@@ -81,7 +81,10 @@ Con el Input y Output tenemos una buena comunicación entre los componentes, per
 
 ![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.46.03-pm.png)
 
-* ReplaySubject
+* ReplaySubject. Este es una especia de BehaviorSubject, este puede repetir el ultimo valor que haya sido pasado al momento de la suscripción e incluso se puede configurar si se desea pasar valores anteriores. 
+
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.49.06-pm.png)
+
 * AsyncSubject
 
 
