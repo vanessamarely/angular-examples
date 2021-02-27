@@ -20,7 +20,10 @@ Basado en ese marco inicial, en la página oficial podemos encontrar un diagrama
 Los conceptos claves de la arquitectura en Angular son:
 
 * La estructura de Módulos
-* Organizar los Componentes
-* Librerías personalizadas
+* Organización de los Componentes
+* Librerías personalizadas \(Rehusar algún componente o servicio a través de toda la aplicación o entre aplicaciones\)
 * Técnicas de comunicación entre componentes
+* RxJS \(Observables\)
+* State Management  o Administración el estado
+* Decoradores personalizados, Pipes, entre otros.
 
