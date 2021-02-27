@@ -38,7 +38,27 @@ En la documentación de Angular, podemos ver un ejemplo sencillo del uso de los 
 
 ![](../../../.gitbook/assets/folder-structure.png)
 
-**Nota.** Si tenemos en cuenta el proyecto que vamos a construir , podemos pensar en el concepto de tener una aplicación con una arquitectura modular o por features, por que podemos definir que el home sea un feature y el tablero o board sea otro feature.
+## Estructurando nuestra aplicación
+
+Si tenemos en cuenta el proyecto que vamos a construir , podemos pensar en el concepto de tener una aplicación con una arquitectura modular o por features, por qué podemos definir que el home sea un feature y el tablero o board sea otro feature, etc.
+
+Iniciando con la planeación o el mapa que había mencionado antes, para construir el Kanban, tal vez no vayamos a usar todos los puntos mencionados anteriormente, pero podemos iniciar respondiendo a lo siguiente que va a ser realmente lo que abordaremos:
+
+* **Visión general de nuestra aplicación**, el objetivo será construir un Kanban o tablero, en el contaremos con dos secciones principales una donde crearemos las tareas, en esta sección iremos moviendo las tareas de acuerdo al cambio de estado de ella, podemos crear un modal para crear la tarea, en la sección del home podemos ver un resumen del estado de nuestras tareas.
+* **Features o características de la aplicación**. Board, Home y componentes compartidos como una card que puede usarse para ver la tarea.
+* **Comunicación con los servicios**. Usaremos data mockeada, nuestros servicios nos permitirán compartir funcionalidades.
+* **Modelos de Datos**. Entre los componentes pasaremos información mockeada.
+* **Features Components o Características de Componentes**. Algunos componentes serán de presentación como la card para visualizar la tarea.
+* **Shared Functionality o funcionalidad compartida**. El Header, menu y footer serán componentes que usaremos en toda la aplicación y de uso compartido entre las secciones. 3rd party libraries: Usaremos Angular Material y algunos componentes del CDK.
+
+Este proyecto será local en nuestra maquina, no haremos un despliegue así que no pensaremos en la seguridad, autenticación, no tendremos un login; pero de dar un mayor alcance a nivel personal o empresarial, es bueno que pienses en los siguientes aspectos:
+
+* **Domain security o seguridad del dominio**. 
+* **Domain Rules o Reglas de Dominio**. 
+* **Logging**. 
+* **Comunicación con los servicios**. 
+
+\*\*\*\*
 
 
 
