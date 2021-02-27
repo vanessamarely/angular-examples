@@ -63,7 +63,7 @@ Pero es importante tener en cuenta lo siguiente:
 * **Comunicación con los servicios**. Como nuestra aplicación se va a comunicar con el servidor? HTTP? Web Sockets? Restful services
 * **Modelos de Datos**. Qué vamos a pasar en los componentes? estamos obteniendo lo que necesitamos en la API? cómo podemos obtener una pequeña parte de todo lo que obtenemos en la API?
 * **Features Components o Características de Componentes**. como vamos a organizar nuestros componentes, vamos a usar el patrón presentacional. Cómo vamos a manejar la comunicación entre componentes?
-* **Shared Functionality o funcionalidad compartida**. tenemos que definir varios aspectos sobre la aplicación, si vamos a compartir diferentes funcionalidades a lo largo de nuestra app. \#rd party libraries: Material, NGPrime, otra.
+* **Shared Functionality o funcionalidad compartida**. tenemos que definir varios aspectos sobre la aplicación, si vamos a compartir diferentes funcionalidades a lo largo de nuestra app. Componentes como un menu, un modal o 3rd party libraries: Material, NGPrime, otra.
 
 Se pueden definir muchas más consideraciones, pero las anteriores podrían ser nuestra base, la forma en cómo crearemos el mapa de la arquitectura de nuestra aplicación. 
 
