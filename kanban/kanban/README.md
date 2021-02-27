@@ -7,7 +7,7 @@ description: >-
 
 # Kanban Board
 
-## Proyecto: Board 📋
+## Proyecto: Board o Tablero 📋
 
 Durante el día siempre tienes que ejecutar diferentes tipos de tareas, y con este tablero podrás crear tu propio espacio donde las podrás tener de forma organizada,  colocarles una prioridad y una fecha en la que esperas culminarla. 
 
