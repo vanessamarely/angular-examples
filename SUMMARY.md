@@ -13,6 +13,7 @@
 
 * [Kanban Board](kanban/kanban/README.md)
   * [Arquitectura](kanban/kanban/arquitectura/README.md)
+    * [Arquitectura Modular](kanban/kanban/arquitectura/arquitectura-modular.md)
     * [Arquitectura de Componentes](kanban/kanban/arquitectura/arquitectura-de-componentes.md)
   * [Creando el kanban](kanban/kanban/creando-el-kanban.md)
 
