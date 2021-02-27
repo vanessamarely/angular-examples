@@ -55,8 +55,8 @@ Antes de construir una aplicación debemos pensar en ciertos aspectos importante
 
 Pero es importante tener en cuenta lo siguiente:
 
-* **Visión general de nuestra aplicación**, conocer los objetivos, para qué se va a usar la aplicación, como la van a usar, entre otros aspectos que nos sirvan para darnos una gran idea de lo que vamos a construir.
-* **Features o características de la aplicación**. Es muy importante listar todas las características. 
+* **Visión general de nuestra aplicación**, conocer los objetivos, para qué se va a usar la aplicación, como la van a usar, entre otros aspectos que nos sirvan para darnos una gran idea de lo que vamos a construir. Analizar todos los requerimientos.
+* **Features o características de la aplicación**. Es muy importante listar todas las características. Usuarios, Login, Empresa, entre otros.
 * **Domain security o seguridad del dominio**. Habla de la seguridad, reglas en el servidor, como será la comunicación de nuestra API en la aplicación, se va a usar un Token \(**HttpInterceptor**\), o que otro método.
 * **Domain Rules o Reglas de Dominio**. Se van a seguir algunas reglas en el lado del cliente o todas del lado del servidor, será en ambos? y qué sobre la validación?
 * **Logging**. Se van a mostrar los errores en la consola? o tal vez en el LocalStorage? se va a manejar una API para la autenticación o vamos a integrar nuestra aplicación con alguna librería, third-party option o servicio en la nube?
