@@ -17,3 +17,10 @@ Basado en ese marco inicial, en la página oficial podemos encontrar un diagrama
 
 ![](../../../.gitbook/assets/68747470733a2f2f616e67756c61722e696f2f67656e6572617465642f696d616765732f67756964652f6172636869746563747572652f6f76657276696577322e706e67.png)
 
+Los conceptos claves de la arquitectura en Angular son:
+
+* La estructura de Módulos
+* Organizar los Componentes
+* Librerías personalizadas
+* Técnicas de comunicación entre componentes
+
