@@ -56,8 +56,6 @@ Beneficios del OnPush
 * Optimización \(los componentes no están verificados hasta que se cumpla una condición del OnPush\)
 * Prevenir que los componentes de presentación actualicen el estado que deberían obtener del contenedor/padre
 
-
-
 ###  Porqué necesitamos un estado?
 
 Se tiene un servidor que tiene un valor,  se puede tener las rutas que trae data que se comparte entre ellas, y se muestra esa data en la página. Necesitamos la data proveniente de algún lugar para mostrarla en otro; y el estado es quién se encarga de ayudarnos en la comunicación de esas dos necesidades, se puede decir que es la interface entre los datos y los componentes. Ademas nos ayuda a tener los datos consistentes entre componentes y a mantener la comunicación entre ellos.
