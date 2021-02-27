@@ -6,13 +6,13 @@
 
 ## CDK <a id="cdk-1"></a>
 
-* [CDK](cdk-1/cdk.md)
-* [Tienda - CDK](cdk-1/tienda-cdk.md)
+* [Tienda CDK](cdk-1/cdk/README.md)
+  * [Creando la tienda - CDK](cdk-1/cdk/tienda-cdk.md)
 
 ## Kanban
 
 * [Kanban Board](kanban/kanban/README.md)
   * [Arquitectura](kanban/kanban/arquitectura/README.md)
     * [Arquitectura de Componentes](kanban/kanban/arquitectura/arquitectura-de-componentes.md)
-* [Creando el kanban](kanban/creando-el-kanban.md)
+  * [Creando el kanban](kanban/kanban/creando-el-kanban.md)
 

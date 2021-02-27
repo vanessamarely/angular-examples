@@ -4,7 +4,7 @@ description: >-
   tienda, usando adicionalmente Angular Material.
 ---
 
-# Tienda - CDK
+# Creando la tienda - CDK
 
 ## 1. Crea tu  App usando el angular-cli
 
@@ -52,13 +52,13 @@ ng serve --open
 
 Añadiendo el "--open" se abre automaticamente una pestaña en tu navegador por defecto, con el scafolding incluido en el angular-cli del Hola Mundo! de angular
 
-![](../.gitbook/assets/screen-shot-2020-08-16-at-6.13.02-pm.png)
+![](../../.gitbook/assets/screen-shot-2020-08-16-at-6.13.02-pm.png)
 
 ## 2. Instalemos una Herramienta visual
 
 Para colocar nuestra aplicación bonita, haremos uso de Angular Material, para incluir sus componentes en la creación de nuestra tienda.
 
-![](../.gitbook/assets/screen-shot-2020-08-16-at-7.53.12-pm.png)
+![](../../.gitbook/assets/screen-shot-2020-08-16-at-7.53.12-pm.png)
 
 Colocaremos en nuestra terminal el siguiente comando:
 
@@ -68,15 +68,15 @@ ng add @angular/material
 
 Al ejecutar el comando te pedirá seleccionar un tema:
 
-![](../.gitbook/assets/screen-shot-2020-08-16-at-6.16.32-pm.png)
+![](../../.gitbook/assets/screen-shot-2020-08-16-at-6.16.32-pm.png)
 
 Ademas te preguntará si deseas incluir los estilos de la tipografia de Material:
 
-![](../.gitbook/assets/screen-shot-2020-08-16-at-6.16.43-pm.png)
+![](../../.gitbook/assets/screen-shot-2020-08-16-at-6.16.43-pm.png)
 
 Por último te preguntará si deseas añadir las animaciones de Angular Material, escribiremos "Y", para incluirlas.
 
-![](../.gitbook/assets/screen-shot-2020-08-16-at-6.16.53-pm.png)
+![](../../.gitbook/assets/screen-shot-2020-08-16-at-6.16.53-pm.png)
 
 Para incluir algunos gestos  que tienen nuestros componentes, debemos instalar hammer:
 
@@ -518,7 +518,7 @@ drop(event: CdkDragDrop<any[]>) {
 
 Ahora nuestra tienda en una forma básica esta lista, si arrastramos y soltamos nuestros elementos, de una sección a otra podremos ver nuestro drag&drop en funcionamiento. 
 
-![](../.gitbook/assets/draganddrop.gif)
+![](../../.gitbook/assets/draganddrop.gif)
 
 Incluiremos un botón \(Comprar\) que será visible cuando tengamos elementos en la sección de "shopping-cart". Cuando demos click en el botón se llamará una función donde mostraremos una función con la lista de los títulos de nuestros productos.
 
@@ -605,7 +605,7 @@ Incluiremos un poco de estilos:
 ```
 {% endcode %}
 
-![](../.gitbook/assets/draganddrop%20%281%29.gif)
+![](../../.gitbook/assets/draganddrop%20%281%29.gif)
 
 Para ver más detalles de la documentación del Drag&Drop, se puede revisar en el siguiente link: [https://material.angular.io/cdk/drag-drop/overview](https://material.angular.io/cdk/drag-drop/overview)
 

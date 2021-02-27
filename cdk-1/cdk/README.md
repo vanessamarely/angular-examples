@@ -4,7 +4,7 @@ description: >-
   personalizarlas de acuerdo a la guía de diseño que elijamos.
 ---
 
-# CDK
+# Tienda CDK
 
 
 
