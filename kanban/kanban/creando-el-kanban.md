@@ -1,5 +1,5 @@
 ---
-description: 'Ahora vamos a iniciar con nuestro Kanban, así que manos a la obra'
+description: "Ahora vamos a iniciar con nuestro Kanban, así que manos a la obra \U0001F44D"
 ---
 
 # Creando el kanban
