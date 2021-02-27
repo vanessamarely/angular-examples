@@ -71,6 +71,21 @@ Con el Input y Output tenemos una buena comunicación entre los componentes, per
 **RxJS** es una librería de programación reactiva, basada en eventos a través de secuencias de observables.
 {% endhint %}
 
+**RxJS Subjects**
+
+* Subject. Los subject proporcionan una manera de enviar uno a más datos a los oyentes. Estos oyentes están subscritos y obtiene la información. En el caso de haber nuevos subscriptores estos no obtendrán la data que se paso antes a los oyentes, solo los nuevos obtienen la data que se está transmitiendo desde el momento de la subscripción.
+
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.42.49-pm.png)
+
+* BehaviorSubject. Es muy similar a los subject, con la diferencia que los nuevos suscriptores pueden obtener la última información que se haya pasado previamente a su subscripción. 
+
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.46.03-pm.png)
+
+* ReplaySubject
+* AsyncSubject
+
+
+
 ###  Porqué necesitamos un estado?
 
 Se tiene un servidor que tiene un valor,  se puede tener las rutas que trae data que se comparte entre ellas, y se muestra esa data en la página. Necesitamos la data proveniente de algún lugar para mostrarla en otro; y el estado es quién se encarga de ayudarnos en la comunicación de esas dos necesidades, se puede decir que es la interface entre los datos y los componentes. Ademas nos ayuda a tener los datos consistentes entre componentes y a mantener la comunicación entre ellos.
