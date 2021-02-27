@@ -36,6 +36,8 @@ Entre el contenedor y el componente de presentación una forma de compartir la d
 
 ![](../../../.gitbook/assets/screen-shot-2021-02-23-at-9.47.05-pm.png)
 
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.02.23-pm.png)
+
 El Input nos permite pasar una data como entrada a nuestro componente, comúnmente la usamos para pasar data entre padres a hijos, si necesitáramos pasar desde el hijo al padre, usaríamos el Output.
 
 La data viene de una petición como por el HttpClient, una Store \(NgrX\), o una ruta y todo va al contenedor, esas diferentes fuentes van al contenedor y este hace lo que requiere el estado y lo pasa al componente presentacional, para renderizar lo que se necesita. 
