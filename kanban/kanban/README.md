@@ -17,9 +17,12 @@ Lo mejor es que podrás personalizar tu tablero y hacer volar tu imaginación pa
 
 ### Indice
 
-* Arquitectura
-* Guia de estilos
+1. Arquitectura
+
+*  Guia de estilos
 * Recomendaciones generales
+
+     2. Creando el Kanban
 
 
 
