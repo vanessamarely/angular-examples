@@ -38,7 +38,7 @@ En la documentación de Angular, podemos ver un ejemplo sencillo del uso de los 
 
 ![](../../../.gitbook/assets/folder-structure.png)
 
-
+**Nota.** Si tenemos en cuenta el proyecto que vamos a construir , podemos pensar en el concepto de tener una aplicación con una arquitectura modular o por features, por que podemos definir que el home sea un feature y el tablero o board sea otro feature.
 
 
 
