@@ -17,9 +17,11 @@ Podemos destacar algunas de ellas como:
 * **Reglas en los nombres**, usar mayusculas para iniciar los nombres, minúsculas, Camelcase, separar los nombres por guiones, nombrar los archivos seguidos del tipo de archivo, entre otras. 
 * **Estructura de la aplicación**, manejar un directorio raíz para toda la aplicación, crear carpetas por cada característica de la aplicación, o tener carpetas para manejar los assets. Principio LIFT, para estructurar la aplicación de tal manera que se pueda Localizar \(`L`ocate\) el código rápidamente, Identificar \(`I`dentify\) el código rápidamente, mantener la estructura plana \(`F`lattest\), y Tratar \(`T`ry\) de mantenerte DRY \(Don't Repeat Yourself\) o T-DRY \(Try to DRY\). 
 * **Organizando los módulos**, en este definimos si deseamos crear un módulo por cada característica de nuestra aplicación, crear el modulo App, módulos reusables.
-* Creando y usando los componentes.
-* Creando y usando los servicios.
-* Lifecycle hooks.
+* **Creando y usando los componentes**. como extraer los templates o hojas de estilos de los componentes, usar los decoradores Input/Output, añadir la lógica presentacional en los componentes. 
+* **Creando y usando los servicios**. Usar los servicios como "Singletons", con el mismo injector. Usar los servicios para compartir datos y funcionalidades.
+* **Lifecycle hooks**. usar el ciclo de vida para usar los eventos importantes de Angular. 
+
+
 
 
 
