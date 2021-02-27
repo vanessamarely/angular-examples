@@ -18,7 +18,7 @@ Con estos componentes nos probamos a nosotros mismos en cuanto a la separación 
 
 * Container components o Componentes contenedores
 
-Estos componentes son los Smart o inteligentes. Se encargan de conector los "dumb" al estado de la aplicación. Maneja los eventos emitidos, el de presentación emite un evento, y este  responde a ese evento y se hace los llamados al servidor y actualiza lo necesario para ver los cambios necesarios en la UI o interfaz de usuario. El contenedor es el que controla todo.
+Estos componentes son los Smart o inteligentes. Se encargan de conector los "Dumb" al estado de la aplicación. Maneja los eventos emitidos, el de presentación emite un evento, y este  responde a ese evento y se hace los llamados al servidor y actualiza lo necesario para ver los cambios necesarios en la UI o interfaz de usuario. El contenedor es el que controla todo el el administrador, se encarga interactuar con los servicios o el state Management.
 
 * Layout components o componentes de diseño
 
