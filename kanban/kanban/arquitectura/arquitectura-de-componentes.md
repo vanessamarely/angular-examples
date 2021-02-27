@@ -85,9 +85,9 @@ Con el Input y Output tenemos una buena comunicación entre los componentes, per
 
 ![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.49.06-pm.png)
 
-* AsyncSubject
+* AsyncSubject. Este es diferente a los demás, con el se pasa el valor más actualizado
 
-
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.51.11-pm.png)
 
 ###  Porqué necesitamos un estado?
 
