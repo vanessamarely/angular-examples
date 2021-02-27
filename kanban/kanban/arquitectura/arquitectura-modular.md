@@ -45,7 +45,7 @@ Si tenemos en cuenta el proyecto que vamos a construir , podemos pensar en el co
 Iniciando con la planeación o el mapa que había mencionado antes, para construir el Kanban, tal vez no vayamos a usar todos los puntos mencionados anteriormente, pero podemos iniciar respondiendo a lo siguiente que va a ser realmente lo que abordaremos:
 
 * **Visión general de nuestra aplicación**, el objetivo será construir un Kanban o tablero, en el contaremos con dos secciones principales una donde crearemos las tareas, en esta sección iremos moviendo las tareas de acuerdo al cambio de estado de ella, podemos crear un modal para crear la tarea, en la sección del home podemos ver un resumen del estado de nuestras tareas.
-* **Features o características de la aplicación**. Board, Home y componentes compartidos como una card que puede usarse para ver la tarea.
+* **Features o características de la aplicación**. Board, Home y componentes compartidos como una card que puede usarse para ver la tarea. Crearemos un modulo por cada feature.
 * **Comunicación con los servicios**. Usaremos data mockeada, nuestros servicios nos permitirán compartir funcionalidades.
 * **Modelos de Datos**. Entre los componentes pasaremos información mockeada.
 * **Features Components o Características de Componentes**. Algunos componentes serán de presentación como la card para visualizar la tarea.
@@ -58,7 +58,9 @@ Este proyecto será local en nuestra maquina, no haremos un despliegue así que 
 * **Logging**. 
 * **Comunicación con los servicios**. 
 
-\*\*\*\*
+Teniendo en cuenta nuestro features lo principal de nuestra aplicación seria la siguiente estructura:
+
+![](../../../.gitbook/assets/example.png)
 
 
 
