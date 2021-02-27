@@ -7,6 +7,8 @@ description: >-
 
 # Arquitectura
 
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.02.59-pm.png)
+
 Según la documentación oficial de Angular, la arquitectura de una aplicación en Angular, se basa en ciertos conceptos fundamentales. Los bloques de construcción básicos del marco angular son componentes angulares que están organizados en NgModules. 
 
 NgModules recopila código relacionado en conjuntos funcionales; una aplicación de Angular está definida por un conjunto de NgModules. Una aplicación siempre tiene al menos un módulo raíz que permite el arranque y, por lo general, tiene muchos más módulos de funciones.
