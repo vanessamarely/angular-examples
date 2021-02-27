@@ -31,10 +31,9 @@ Por último necesitamos el [CLI-Angular](https://cli.angular.io/), que nos facil
 npm install -g @angular/cli
 ```
 
-En este curso construiremos un proyecto que llamaremos Platzi-board o tablero de platzi. Sabemos que hemos estado en una situación social de pandemia, que nos ha afectado un poco a nivel productivo, este proyecto te ayudará a organizar un poco tus tareas del día a día, de una forma ágil y efectiva.   
+Un Kanban es como un tablero. Sabemos que hemos estado en una situación social de pandemia, que nos ha afectado un poco a nivel productivo, este proyecto te ayudará a organizar un poco tus tareas del día a día, de una forma ágil y efectiva. 
 
-
-Dirás que este tablero se parece a un kanban, de los que puedes encontrar para descargarlos en tu máquina, pero este lo harás tú mismo y podrás personalizarlo de acuerdo a tus necesidades.
+Dirás que este tablero, es parecido a una aplicación de las que encuentras por ahí para descargarla en tu máquina, para qué este proyecto?. Te cuento que con este proyecto podrás ver un poco que tanto tiene esa aplicación que descargas, lo harás tú mismo y podrás personalizarlo de acuerdo a tus necesidades e integrarlo con las herramientas que desees, puedes ir gradualmente aumentandole la complejidad. 
 
 En este tablero podremos ir creando nuestras tareas, tendremos 3 listas, una de tareas:  ¿qué hacer?, otra de tareas en progreso, y una de está hecho, en estas listas iremos colocando las tareas que vayan pasando por cada una de esas etapas.  
 
@@ -42,6 +41,6 @@ En este tablero podremos ir creando nuestras tareas, tendremos 3 listas, una de 
 Tendremos un home, en él podremos ver una lista de nuestras tareas de acuerdo a la prioridad, estas tareas se crearán en la sección tablero donde crearemos nuestras tareas, las podremos mover por nuestras listas y una vez creadas, podemos, en el home revisarlas por categorías.  
 
 
-Estoy muy contenta de ser tu profesora e iniciar este viaje contigo en este curso de Componentes Web UI con Angular Material, pondremos en práctica varios componentes de Material y aplicaremos los componentes del CDK. En la siguiente clase aprenderemos que es CDK, así que en un momento nos veremos.  
+Usaremos un poco de componentes CDK, así que repasaremos un poco estos.  
 
 
