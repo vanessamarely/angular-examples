@@ -22,3 +22,7 @@ Comúnmente se tienen los siguientes módulos en las aplicaciones:
 
 En la documentación de Angular, podemos ver un ejemplo sencillo del uso de los modelos mencionados:
 
+
+
+
+
