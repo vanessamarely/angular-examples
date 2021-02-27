@@ -21,6 +21,8 @@ Lo mejor es que podrás personalizar tu tablero y hacer volar tu imaginación pa
 
 *  Guia de estilos
 * Recomendaciones generales
+* Arquitectura de componentes
+* Arquitectura Modular
 
      2. Creando el Kanban
 
