@@ -1,3 +1,9 @@
+---
+description: >-
+  A esta se le conoce como modular porque creamos un modulo por cada feature de
+  nuestra aplicación y le damos un orden.
+---
+
 # Arquitectura Modular
 
 A la hora de organizar nuestro código deseamos que nuestra aplicación sea escalable y limpia, y en esa escalabilidad nos ayuda encontrar una estructura de carpetas adecuada para nuestro proyecto.
