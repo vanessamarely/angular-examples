@@ -49,5 +49,23 @@ Tips alusivos de este principio son:
 * **Evitar la duplicidad**. Es recomendable que cuando veas código duplicado crees una solución reusable de ello, es bueno evitar copiar y pegar el código en diferentes lugares para horrarte tiempo.
 * Aplicar más principios. Como el principio **SOLID**. 
 
+### Aspectos a considerar en la Arquitectura
+
+Antes de construir una aplicación debemos pensar en ciertos aspectos importantes que son necesarios, e incluso hablando desde un rol diferente a desarrolladores, como arquitectos de un edificio, debemos seguir los planos; pero en una aplicación no tenemos un único plano para construir nuestra aplicación de esa forma.  
+
+Pero es importante tener en cuenta lo siguiente:
+
+* **Visión general de nuestra aplicación**, conocer los objetivos, para qué se va a usar la aplicación, como la van a usar, entre otros aspectos que nos sirvan para darnos una gran idea de lo que vamos a construir.
+* **Features o características de la aplicación**. Es muy importante listar todas las características. 
+* **Domain security o seguridad del dominio**. Habla de la seguridad, reglas en el servidor, como será la comunicación de nuestra API en la aplicación, se va a usar un Token, o que otro método.
+* **Domain Rules o Reglas de Dominio**. Se van a seguir algunas reglas en el lado del cliente o todas del lado del servidor, será en ambos? y qué sobre la validación?
+* **Logging**. Se van a mostrar los errores en la consola? o tal vez en el LocalStorage? se va a manejar una API para la autenticación o vamos a integrar nuestra aplicación con alguna librería, third-party option o servicio en la nube?
+* **Comunicación con los servicios**. Como nuestra aplicación se va a comunicar con el servidor? HTTP? Web Sockets? 
+* **Modelos de Datos**. Qué vamos a pasar en los componentes? estamos obteniendo lo que necesitamos en la API? cómo podemos obtener una pequeña parte de todo lo que obtenemos en la API?
+* **Features Components o Características de Componentes**. como vamos a organizar nuestros componentes, vamos a usar el patrón presentacional. Cómo vamos a manejar la comunicación entre componentes?
+* **Shared Functionality o funcionalidad compartida**. tenemos que definir varios aspectos sobre la aplicación, si vamos a compartir diferentes funcionalidades a lo largo de nuestra app.
+
+Se pueden definir muchas más consideraciones, pero las anteriores podrían ser nuestra base, la forma en cómo crearemos el mapa de la arquitectura de nuestra aplicación. 
+
 
 
