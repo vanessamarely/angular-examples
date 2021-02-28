@@ -17,5 +17,5 @@
     * [Recomendaciones Generales](kanban/kanban/arquitectura/recomendaciones-generales.md)
     * [Arquitectura de Componentes](kanban/kanban/arquitectura/arquitectura-de-componentes.md)
     * [Arquitectura Modular](kanban/kanban/arquitectura/arquitectura-modular.md)
-  * [Creando el kanban](kanban/kanban/creando-el-kanban.md)
+  * [Creando el Kanban Board](kanban/kanban/creando-el-kanban.md)
 

@@ -2,7 +2,7 @@
 description: "Ahora vamos a iniciar con nuestro Kanban, así que manos a la obra \U0001F44D"
 ---
 
-# Creando el kanban
+# Creando el Kanban Board
 
 ## Prerrequisitos 
 
@@ -40,6 +40,51 @@ En este tablero podremos ir creando nuestras tareas, tendremos 3 listas, una de 
 Tendremos un home, en él podremos ver una lista de nuestras tareas de acuerdo a la prioridad, estas tareas se crearán en la sección tablero donde crearemos nuestras tareas, las podremos mover por nuestras listas y una vez creadas, podemos, en el home revisarlas por categorías.
 
 Usaremos un poco de componentes CDK, así que repasaremos un poco estos conceptos.
+
+## **Creando nuestra aplicación**
+
+Una vez instalado el Angular CLI, crearemos un proyecto y añadiremos Angular Material e incluiremos uno de los temas sugeridos, crearemos el módulo donde iremos añadiendo nuestros componentes de Material y CDK.
+
+En nuestro IDE en la terminal ejecutaremos el siguiente comando:
+
+```bash
+ng new workshop
+```
+
+* Podemos seleccionar que sea estricto.
+* Usaremos **SASS**, en este caso escogeremos la sintaxis de sasy.
+* Diremos "yes" al routing 
+* Una vez termina la creación de nuestro proyecto, podemos ejecutarlo con:
+
+```bash
+ng serve -o
+```
+
+Es hora de incluir Angular Material y los componentes de CDK, ejecutaremos el siguiente comando:
+
+```bash
+ng add @angular/material
+```
+
+Seleccionamos un tema:
+
+![](../../.gitbook/assets/screen-shot-2021-02-27-at-10.09.18-pm.png)
+
+Configuramos la tipografia global y el browser animation de material.
+
+![](../../.gitbook/assets/screen-shot-2021-02-27-at-10.10.41-pm.png)
+
+En nuestro archivo **styles.scss** incluiremos los estilos del tema que acabamos de incluir
+
+```css
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+```
+
+![](../../.gitbook/assets/screen-shot-2021-02-27-at-10.13.21-pm.png)
+
+Creemos un módulo de material-cdk en el cual iremos importando los módulos de Material y de CDK
+
+
 
   
 
