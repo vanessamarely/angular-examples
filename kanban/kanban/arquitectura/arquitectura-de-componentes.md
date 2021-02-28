@@ -65,7 +65,12 @@ Beneficios del OnPush
 Con el Input y Output tenemos una buena comunicación entre los componentes, pero cuando incrementa la complejidad de nuestra aplicación y se necesita una mayor jerarquía, se puede volver algo complejo usar esta forma conocida y es necesario usar otras técnicas de comunicación.
 
 * Event Bus. Es un patrón mediador, el servicio actúa como un intermediario entre los componentes. Los componentes no saben de donde viene la data y es débilmente acoplado. Se basa en Subject/observable.
+
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-7.19.37-pm.png)
+
 * Observable service. Proviene del patrón Observer. El servicio expone un observable directamente a los componentes. Los componentes saben de donde proviene la data, no es débilmente acoplado como el Event bus. Se basa en Subjects/observable.
+
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-7.17.57-pm.png)
 
 {% hint style="info" %}
 **RxJS** es una librería de programación reactiva, basada en eventos a través de secuencias de observables.
