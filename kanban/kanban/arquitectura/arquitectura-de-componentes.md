@@ -32,11 +32,11 @@ Container \(Contenedor\)     -&gt;        Layout \(Diseño\)      -&gt;     Pres
 
 Entre el contenedor y el componente de presentación una forma de compartir la data es mediante Input y Outputs.
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-4.00.20-pm.png)
+![](../../../.gitbook/assets/presentacionl1.png)
 
-![](../../../.gitbook/assets/screen-shot-2021-02-23-at-9.47.05-pm.png)
+![](../../../.gitbook/assets/presentacionl2.png)
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.02.23-pm.png)
+![](../../../.gitbook/assets/presentacionl3.png)
 
 El Input nos permite pasar una data como entrada a nuestro componente, comúnmente la usamos para pasar data entre padres a hijos, si necesitáramos pasar desde el hijo al padre, usaríamos el Output.
 
