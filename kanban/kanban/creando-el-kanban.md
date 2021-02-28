@@ -1695,5 +1695,163 @@ En la vista del create-task vamos a colocar el atributo que manejara el texto de
 
 ### Eliminar Tarea
 
+En la vista del componente tarea vamos a añadir otro botón para que se encargue de la funcionalidad de eliminar.
 
+{% tabs %}
+{% tab title="task.component.html" %}
+```markup
+ <button  matTooltip="Eliminar tarea" matTooltipPosition="above" mat-icon-button (click)="removeTask(task.id)">
+   <mat-icon aria-label="icon-button to remove">delete</mat-icon>
+ </button>
+```
+{% endtab %}
+{% endtabs %}
+
+En nuestro task.component.ts crearemos la función que eliminará la tarea.
+
+{% tabs %}
+{% tab title="task.component.ts" %}
+```typescript
+  removeTask(taskId: string): void {
+    console.log('Eliminar tarea', taskId);
+  }
+```
+{% endtab %}
+{% endtabs %}
+
+Para hacer más visible al usuario que hemos eliminado nuestra tarea, vamos a usar el Dialogo de Material para mostrar un mensaje, primero importaremos el componente en el modulo material-cdk.module.ts
+
+{% tabs %}
+{% tab title="material-cdk.module.ts" %}
+```typescript
+...
+import { MatDialogModule } from '@angular/material/dialog';
+...
+const components = [
+...
+MatDialogModule,
+];
+...
+```
+{% endtab %}
+{% endtabs %}
+
+Crearemos un componente modal, podemos crearlo solo visible para el modulo del Board, pero pensemos en algo más global y lo crearemos en el Shared, para usarlo en diferentes lugares si lo necesitamos.
+
+```bash
+ng g c shared/components/modal
+```
+
+En nuestro componente modal, vamos a usar el Portal para cambiar el mensaje que mostraremos en nuestro modal, vamo a importar en el material-cdk.module.ts el Portal
+
+{% tabs %}
+{% tab title="material-cdk.module.ts" %}
+```typescript
+...
+import { PortalModule } from '@angular/cdk/portal';
+...
+const components = [
+...
+PortalModule,
+..
+```
+{% endtab %}
+{% endtabs %}
+
+En el componente modal.component.ts vamos a incluir el Template del portal
+
+{% tabs %}
+{% tab title="modal.component.ts" %}
+```typescript
+import { Component, AfterViewInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import {TemplatePortal} from '@angular/cdk/portal';
+
+@Component({
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss']
+})
+export class ModalComponent implements AfterViewInit {
+  @ViewChild('templatePortalContent') templatePortalContent: TemplateRef<unknown>;
+
+  templatePortal: TemplatePortal<any>;
+
+  constructor(private _viewContainerRef: ViewContainerRef) { }
+
+  ngAfterViewInit(): void {
+    this.templatePortal = new TemplatePortal(
+      this.templatePortalContent,
+      this._viewContainerRef
+    );
+  }
+
+}
+
+```
+{% endtab %}
+{% endtabs %}
+
+Editaremos un poco la vista
+
+{% tabs %}
+{% tab title="modal.component.html" %}
+```markup
+<mat-dialog-content>
+  <ng-container *cdkPortalOutlet></ng-container>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close color="secondary">
+    <mat-icon aria-hidden="false" aria-label="close icon">close</mat-icon>
+  </button>
+</mat-dialog-actions>
+
+
+<div #templatePortalContent>Tu Tarea ha sido eliminada exitosamente!</div>
+```
+{% endtab %}
+{% endtabs %}
+
+E incluimos un poco de estilos
+
+{% tabs %}
+{% tab title="modal.component.scss" %}
+```css
+.mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+div {
+  font-size: 1.5em;
+}
+```
+{% endtab %}
+{% endtabs %}
+
+En el task.component.ts vamos a incluir el modal para llamarlo al ejecutar la función del eliminar
+
+{% tabs %}
+{% tab title="task.component.ts" %}
+```typescript
+...
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+...
+constructor(public dialog: MatDialog) { }
+...
+removeTask(taskId: string): void {
+    console.log('Eliminar tarea', taskId);
+    const dialogRef = this.dialog.open(ModalComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Eliminar tarea', result);
+    });
+  }
+```
+{% endtab %}
+{% endtabs %}
+
+Ahora tenemos con la data mockeada un CRUD, para crear, editar y eliminar nuestra tarea.
+
+![](../../.gitbook/assets/board7.gif)
 
