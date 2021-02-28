@@ -127,5 +127,186 @@ ng g c shared/components/header
 ng g c shared/components/footer
 ```
 
+Importamos el módulo de material-cdk en nuestro shared, ya que más adelante incluiremos varios módulos que usaremos en nuestro modulo shared. Ademas crearemos una constante donde pondremos ahi los elementos que vamos a incluir en las declaraciones y en los exports:
 
+{% tabs %}
+{% tab title="shared.module.ts" %}
+```typescript
+...
+import { MaterialCdkModule } from "./../material-cdk/material-cdk.module";
+
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+
+const declarables = [ HeaderComponent, FooterComponent ];
+@NgModule({
+  declarations: [declarables],
+  imports: [
+    CommonModule,
+    MaterialCdkModule,
+  ],
+  exports: declarables,
+})
+export class SharedModule { }
+
+```
+{% endtab %}
+{% endtabs %}
+
+En el Modulo de Material-CDK incluiremos dos componentes de Material y creamos una constante para colocar los componentes en las declaraciones y exportarlos para ser usados. Importamos el módulo Toolbar y el icon en nuestro módulo material-cdk.
+
+{% tabs %}
+{% tab title="material-cdk.module.ts" %}
+{% code title="material-cdk.module.ts" %}
+```typescript
+//Material
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+
+const components = [MatToolbarModule, MatIconModule];
+
+@NgModule({
+  declarations: [],
+  imports: [CommonModule, components],
+  exports: components,
+})
+export class MaterialCdkModule {}
+```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
+
+Coloquemos algo de contenido en nuestro componente Footer y Header.
+
+En nuestro header crearemos un Toolbar, incluiremos algunos iconos para que nuestro toolbar se vea más bonito, si deseas añadir otro icono diferente puedes buscar la lista de iconos en la página de Angular Material.
+
+Nuestro toolbar tendrá un menú, en los anchor añadiremos las rutas que tendremos de los módulos que crearemos en clases posteriores.
+
+Colocaremos un poco de formato, para que nuestra aplicación vaya luciendo mejor.
+
+{% tabs %}
+{% tab title="header.component.html" %}
+```markup
+
+<mat-toolbar color="primary" class="toolbar">
+  <span>Platzi Tablero</span>
+  <span class="toolbar__spacer"></span>
+  <nav class="toolbar__menu">
+    <ul>
+      <li>
+        <button mat-icon-button class="toolbar__menu__icon favorite-icon" aria-label="Home option">
+          <mat-icon>home</mat-icon>
+        </button>
+        <a href="#" routerLink="/home" routerLinkActive="active" class="toolbar__menu__text">
+          <span >Inicio</span>
+        </a>
+      </li>
+      <li>
+        <button mat-icon-button class="toolbar__menu__icon" aria-label="Board option">
+          <mat-icon>note</mat-icon>
+        </button>
+        <a href="#" routerLink="/board" routerLinkActive="active" class="toolbar__menu__text"><span>
+          Tablero</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</mat-toolbar>
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="header.component.scss" %}
+```css
+.toolbar {
+  display: flex;
+  &__spacer {
+    flex: 1 1 auto;
+  }
+  &__menu {
+    margin: 0 auto;
+    list-style:none;
+    ul {
+      display: flex;
+      list-style:none;
+    }
+    &__icon{
+      border:0;
+      background-color: transparent;
+      color: white;
+      vertical-align: middle;
+    }
+    &__text {
+      color: white;
+      text-decoration: none;
+      vertical-align: middle;
+    }
+  }
+}
+
+```
+{% endtab %}
+{% endtabs %}
+
+Coloquemos un atributo en el footer, que será usado en nuestro componente footer
+
+{% tabs %}
+{% tab title="footer.component.ts" %}
+```typescript
+today: number = Date.now();
+```
+{% endtab %}
+{% endtabs %}
+
+En nuestro footer incluiremos otro toolbar, más sencillo y algunos estilos.
+
+{% tabs %}
+{% tab title="footer.component.html" %}
+```markup
+<footer class="footer">
+  <mat-toolbar color="primary" class="toolbar">
+    <p class="toolbar__text"> &copy; {{ today | date: 'yyyy' }}</p>
+  </mat-toolbar>
+</footer>
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="footer.component.scss" %}
+```css
+.footer {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  .toolbar {
+    &__text {
+      text-align: center;
+      width: 100%;
+    }
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Borremos el contenido de nuestra vista app:  app.component.html y coloquemos un hola!, si observamos en el navegador podemos ver la palabra Hola!
+
+![](../../.gitbook/assets/screen-shot-2021-02-27-at-11.27.55-pm.png)
+
+En la vista de app.component.html vamos a incluir nuestro componente header, footer y el router-outlet.
+
+{% tabs %}
+{% tab title="app.component.html" %}
+```markup
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+```
+{% endtab %}
+{% endtabs %}
+
+![](../../.gitbook/assets/screen-shot-2021-02-27-at-11.43.06-pm.png)
 
