@@ -30,9 +30,9 @@ cuando estamos creando nuestra aplicación podemos ubicar los tres tipos de comp
 
 Container \(Contenedor\)     -&gt;        Layout \(Diseño\)      -&gt;     Presentational \(Presentación\)
 
-Entre el contenedor y el componente de presentación una forma de compartir la data es mediante Input y Outputs.
-
 ![](../../../.gitbook/assets/presentacionl1.png)
+
+Entre el contenedor y el componente de presentación una forma de compartir la data es mediante Input y Outputs.
 
 ![](../../../.gitbook/assets/presentacionl2.png)
 
