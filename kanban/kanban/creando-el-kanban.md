@@ -477,7 +477,7 @@ Nuestra página se verá así:
 
 ![](../../.gitbook/assets/board1.gif)
 
-## 3. Creando componentes
+## 3. Creando Componentes
 
 Nuestro Board tiene tres columnas, que es donde se mostraran las tareas respectivas, necesitamos un componente de presentacion para la lista y otro para las tareas.
 
