@@ -1367,6 +1367,167 @@ export class CreateTaskComponent implements OnInit {
 {% endtab %}
 {% endtabs %}
 
+Para el overlay vamos a importar el CdkConnectedOverlay, el cual usaremos en las opciones que crearemos para darle una configuración minima a nuestro overlay. Esta lógica la pondremos en el board component.
+
+{% tabs %}
+{% tab title="board.component.ts" %}
+```typescript
+
+  import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+  
+  ...
+  
+  isOverlayDisplayed = false;
+  readonly overlayOptions: Partial<CdkConnectedOverlay> = {
+    hasBackdrop: true,
+    positions: [
+      { originX: 'start', originY: 'top', overlayX: 'start',  overlayY: 'top'}
+    ]
+  };
+  
+...
+displayOverlay(): void {
+  this.isOverlayDisplayed = true;
+}
+
+hideOverlay(): void {
+  this.isOverlayDisplayed = false;
+}
+...
+```
+{% endtab %}
+{% endtabs %}
+
+En el board.component.html incluiremos un template para mostrar el overlay.
+
+{% tabs %}
+{% tab title="board.component.html" %}
+```markup
+<main class="board" cdkDropListGroup>
+  <button
+    class="board__add"
+    cdkOverlayOrigin
+    (click)="displayOverlay()"
+    #trigger="cdkOverlayOrigin"
+    mat-raised-button
+    color="primary"
+  >
+    Añadir Tarea
+  </button>
+  <section class="board__list">
+    <app-list *ngFor="let list of lists" [list]="list"></app-list>
+  </section>
+  <ng-template
+    #connectedOverlay="cdkConnectedOverlay"
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOverlayDisplayed"
+    [cdkConnectedOverlayHasBackdrop]="overlayOptions.hasBackdrop"
+    [cdkConnectedOverlayPositions]="overlayOptions.positions"
+    (backdropClick)="hideOverlay()"
+    (detach)="hideOverlay()"
+  >
+    <app-create-task [connectedOverlay]="connectedOverlay"></app-create-task>
+  </ng-template>
+</main>
+
+```
+{% endtab %}
+{% endtabs %}
+
+Reestructuraremos un poco los estilos del componente board.
+
+{% tabs %}
+{% tab title="board.component.scss" %}
+```css
+.board {
+  &__add {
+    margin: 1rem;
+  }
+  &__list {
+    display: flex;
+    height: 80vh;
+    overflow-x: auto;
+    padding: 0 1em;
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+![](../../.gitbook/assets/board3.gif)
+
+Al presionar el botón de crear, podemos llamar a nuestro overlay, pero no podemos cerrar en el caso de que no deseemos seguir con este proceso, para ello necesitamos añadir en nuestro componente de creación un boton para cerrar nuestro overlay.
+
+{% tabs %}
+{% tab title="create-task.component.ts" %}
+```typescript
+import { Component, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+...
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+
+...
+@Input() connectedOverlay: CdkConnectedOverlay;
+
+...
+  close(): void {
+    this.connectedOverlay.overlayRef.detach();
+  }
+```
+{% endtab %}
+{% endtabs %}
+
+Incluiremos el botón en nuestro html del create-task
+
+{% tabs %}
+{% tab title="create-task.component.ts" %}
+```markup
+...
+<button class="form__header__close-button" mat-raised-button (click)="close()">
+    <mat-icon aria-hidden="false" aria-label="close icon">close</mat-icon>
+</button>
+...
+```
+{% endtab %}
+{% endtabs %}
+
+Revisando en nuestra aplicación cuando llamemos al overlay, podemos ver en el formulario un icono que al ser presionado, nos permitirá cerrar nuestro overlay.
+
+![](../../.gitbook/assets/board4.gif)
+
+Hemos creado la funcionalidad para crear tareas, ahora crearemos la funcionalidad para editar una tarea.
+
+En el componente tarea, crearemos un icono que al ser presionado nos permitirá editar nuestra tarea.
+
+{% tabs %}
+{% tab title="task.component.html" %}
+```markup
+<button  matTooltip="Editar tarea" matTooltipClass="custom-tooltip-blue" matTooltipPosition="above" mat-icon-button (click)="handleEditTask(task)">
+  <mat-icon aria-label="icon-button to edit">edit</mat-icon>
+</button>
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="task.component.ts" %}
+```typescript
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+...
+@Output() editTask: EventEmitter<TaskSchema> = new EventEmitter();
+...
+handleEditTask(task: TaskSchema){
+    this.editTask.emit(task);
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Queremos que al presionar el icono podamos editar nuestra tarea emitiendo el evento al padre.
+
+
+
 
 
 
