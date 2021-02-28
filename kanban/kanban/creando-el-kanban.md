@@ -589,7 +589,161 @@ export class CoreModule { }
 {% endtab %}
 {% endtabs %}
 
+Incluimos el '**HttpClientModule**' en el archivo **app.module.ts**
 
+{% tabs %}
+{% tab title="app.module.ts" %}
+{% code title="add.module.ts" %}
+```typescript
+import { HttpClientModule } from '@angular/common/http';
 
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ...
+```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
+
+En los imports incluimos el **HttpClientModule** en el '**app.module.ts'**
+
+ Importamos unas dependencias en nuestro nuevo archivo llamado **api.service.ts**,  y añadimos en el constructor lo siguiente: **http: HttpClient** , haciendo uso de la inyección de dependencias \(Patron de diseño\). Este http, va a ser uso de lo que tenga el HttpClient, que este hace parte del nuevo modulo que incluimos en el app.module.ts
+
+Tambien crearemos dos funciones una para obtener la url del API y otra para el manejo de errores, haciendo uso de **HttpErrorResponse.**
+
+Para la url del api, he creado 3, para jugar con los diferentes mocks.
+
+```typescript
+ //api with one task
+ private apiRoot: string = 'https://run.mocky.io/v3/26045374-863c-469d-85c4-51ea1135ce8a';
  
+ //api without any task
+ private apiRoot: string = 'https://run.mocky.io/v3/7841d1af-e8d5-446a-bac5-3506fdd05659';
+ 
+ // api with many task
+ private apiRoot: string = 'https://run.mocky.io/v3/0933ddef-c9bf-4f26-8ddf-77990fb490cb';
+```
+
+Incluso cree un archivo json con alguna data mockeada.
+
+{% tabs %}
+{% tab title="list.json" %}
+```javascript
+{
+  "list": [
+    {
+      "id": "1",
+      "name": "Qué hacer?",
+      "tasks": [
+        {
+          "id": "1",
+          "description": "Tarea 1",
+          "date": "10/26/20",
+          "priority": "urgent"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "¡En progreso!",
+      "tasks": []
+    },
+    {
+      "id": "3",
+      "name": "¡Está hecho!",
+      "tasks": []
+    }
+  ]
+}
+
+```
+{% endtab %}
+{% endtabs %}
+
+Este seria el contenido para nuestro servicio
+
+```typescript
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { throwError as observableThrowError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiService {
+  
+  private apiRoot: string = 'https://run.mocky.io/v3/7015be8f-9657-4eda-af57-ca508c855e66';
+  
+  constructor(private http: HttpClient) { }
+
+  /* Get Api Data from mock service */
+  getApi() {
+    return this.http
+      .get<Array<{}>>(this.apiRoot)
+      .pipe(map(data => data), catchError(this.handleError));
+  }
+
+  /* Handle request error */
+  private handleError(res: HttpErrorResponse | any): any {
+    return observableThrowError(res.error || 'Server error');
+  }
+}
+```
+
+Creare dos interfaces para las tareas y la lista, en una carpeta llamada models. Ademas de incluir un indice en esa carpeta.
+
+{% tabs %}
+{% tab title="taskschema.ts" %}
+```typescript
+export interface TaskSchema {
+  id: string;
+  description: string;
+  date: any;
+  priority: string;
+}
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="listschema.ts" %}
+```typescript
+import { TaskSchema } from './index';
+
+export interface ListSchema {
+    id: string;
+    name: string;
+    cards: TaskSchema[];
+}
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="index.ts" %}
+```typescript
+export * from './taskschema';
+export * from './listschema';
+```
+{% endtab %}
+{% endtabs %}
+
+Haremos uso de nuestro servicio en nuestro contenedor board.
+
+{% tabs %}
+{% tab title="board.component.ts" %}
+```typescript
+import { ApiService, ListSchema } from './../../core';
+
+
+```
+{% endtab %}
+{% endtabs %}
 
