@@ -41,7 +41,7 @@ Tendremos un home, en él podremos ver una lista de nuestras tareas de acuerdo a
 
 Usaremos un poco de componentes CDK, así que repasaremos un poco estos conceptos.
 
-## **Creando nuestro proyecto**
+## **1. Creando nuestro proyecto**
 
 Una vez instalado el Angular CLI, crearemos un proyecto y añadiremos Angular Material e incluiremos uno de los temas sugeridos, crearemos el módulo donde iremos añadiendo nuestros componentes de Material y CDK.
 
@@ -90,7 +90,7 @@ ng g m material-cdk
 
 ![](../../.gitbook/assets/screen-shot-2021-02-27-at-10.37.21-pm.png)
 
-## Creando nuestros modulos
+## 2. Creando nuestros modulos
 
 Crearemos nuestro módulo shared y core.
 
