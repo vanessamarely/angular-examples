@@ -41,7 +41,7 @@ Tendremos un home, en él podremos ver una lista de nuestras tareas de acuerdo a
 
 Usaremos un poco de componentes CDK, así que repasaremos un poco estos conceptos.
 
-## **Creando nuestra aplicación**
+## **Creando nuestro proyecto**
 
 Una vez instalado el Angular CLI, crearemos un proyecto y añadiremos Angular Material e incluiremos uno de los temas sugeridos, crearemos el módulo donde iremos añadiendo nuestros componentes de Material y CDK.
 
@@ -84,8 +84,48 @@ En nuestro archivo **styles.scss** incluiremos los estilos del tema que acabamos
 
 Creemos un módulo de material-cdk en el cual iremos importando los módulos de Material y de CDK
 
+```css
+ng g m material-cdk
+```
 
+![](../../.gitbook/assets/screen-shot-2021-02-27-at-10.37.21-pm.png)
+
+## Creando nuestros modulos
+
+Crearemos nuestro módulo shared y core.
+
+```bash
+ng g m core
+ng g m shared
+```
+
+Importamos el **Core Module** en el **App Module**
+
+{% tabs %}
+{% tab title="app.module.ts" %}
+```typescript
+import { CoreModule } from "./core/core.module";
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    ...
+    CoreModule,
+    ...
+  ],
+  ...
+```
+{% endtab %}
+{% endtabs %}
 
   
+En nuestro Shared creamos una carpeta components donde incluiremos el componente header y el footer
+
+```bash
+ng g c shared/components/header
+ng g c shared/components/footer
+```
+
 
 
