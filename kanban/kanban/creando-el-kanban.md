@@ -99,12 +99,14 @@ ng g m core
 ng g m shared
 ```
 
-Importamos el **Core Module** en el **App Module**
+Importamos el **Core Module** y el **Shared Module** en el **App Module**
 
 {% tabs %}
 {% tab title="app.module.ts" %}
 ```typescript
-import { CoreModule } from "./core/core.module";
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -112,6 +114,7 @@ import { CoreModule } from "./core/core.module";
   imports: [
     ...
     CoreModule,
+    SharedModule,
     ...
   ],
   ...
@@ -309,4 +312,128 @@ En la vista de app.component.html vamos a incluir nuestro componente header, foo
 {% endtabs %}
 
 ![](../../.gitbook/assets/screen-shot-2021-02-28-at-10.19.27-am.png)
+
+Ahora, crearemos nuestro modulo board con el routing, con el siguiente comando
+
+```bash
+ng g m board --routing 
+```
+
+ Incluiremos el board módulo en nuestro app.modulo
+
+{% tabs %}
+{% tab title="app.module.ts" %}
+```typescript
+...
+import { BoardModule } from './board/board.module';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+  ...
+  BoardModule,
+  ...
+```
+{% endtab %}
+{% endtabs %}
+
+Creamos el modulo para el Home
+
+```bash
+ng g m home --routing
+```
+
+Incluiremos este modulo en app.module
+
+{% tabs %}
+{% tab title="app.module.ts" %}
+```typescript
+import { HomeModule } from './home/home.module';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+  ...
+    HomeModule,
+  ...
+```
+{% endtab %}
+{% endtabs %}
+
+Vamos a darle un poco mas de estructura a nuestro modulos para usar el enrutamiento en el Home y el Board.
+
+Creamos un componetente contendor para home y board.
+
+```bash
+ng g c board/board
+ng g c home/home
+```
+
+En el Modulo Board, incluiremos el componente en el enrutamiento.
+
+{% tabs %}
+{% tab title="board-routing.module.ts" %}
+```typescript
+import { BoardComponent } from './board/board.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: BoardComponent
+  }
+];
+```
+{% endtab %}
+{% endtabs %}
+
+Realizaremos lo mismo para el componente Home.
+
+{% tabs %}
+{% tab title="home-routing.module.ts" %}
+```typescript
+import { HomeComponent } from './home/home.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  }
+];
+```
+{% endtab %}
+{% endtabs %}
+
+En el app-routing.module incluiremos el enrutamiento para los modulos respectivos, para que al darle clic al link del 'header' redireccione a la sección respectiva.
+
+{% tabs %}
+{% tab title="app-routing-module.ts" %}
+```typescript
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/board',
+    pathMatch: 'full',
+  },
+  {
+    path: 'board',
+    //loadChildren: './board/board.module#BoardModule'
+    loadChildren: () => import('./board/board.module').then(m => m.BoardModule)
+  },
+  {
+    path: 'home',
+    //loadChildren: './home/home.module#HomeModule',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
+];
+```
+{% endtab %}
+{% endtabs %}
+
+
+
+ 
 
