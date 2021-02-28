@@ -971,5 +971,239 @@ En nuestra página podremos arrastrar nuestra tarea.
 
 ![](../../.gitbook/assets/board2.gif)
 
+De tener más tareas en cada lista, podriamos moverlas por los diferentes estados en los que tendríamos nuestras tareas, ahora creemos un componente que nos permita crear las tareas. Con el angular-cli creemos nuestro componente.
+
+```bash
+ng g c board/components/create-task
+```
+
+Crearemos un formulario reactivo, para ello necesitamos incluir en el app.module.ts el modelo de formulario.
+
+{% tabs %}
+{% tab title="app.module.ts" %}
+```typescript
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+...
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+  ...
+  FormsModule,
+  ReactiveFormsModule,
+  ...
+```
+{% endtab %}
+{% endtabs %}
+
+Usaremos en el formulario varios componentes de material, asi que importaremos los elementos necesarios en material-cdk.ts
+
+{% tabs %}
+{% tab title="material-cdk.ts" %}
+```typescript
+...
+//Material
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+...
+
+const components = [
+  MatToolbarModule,
+  MatIconModule,
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  DragDropModule,
+];
+...
+```
+{% endtab %}
+{% endtabs %}
+
+En el componente de create-task, vamos a crear el modelo del formulario.
+
+{% tabs %}
+{% tab title="create-task.component.ts" %}
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-create-task',
+  templateUrl: './create-task.component.html',
+  styleUrls: ['./create-task.component.scss']
+})
+export class CreateTaskComponent implements OnInit {
+  createTask: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.setForm();
+  }
+  
+  setForm(): void {
+    this.createTask = this.fb.group({
+      date : [''],
+      priority: [''],
+      description : [ '' ]
+    });
+  }
+
+  onFormAdd(form: any): void {
+
+  }
+
+
+}
+
+
+```
+{% endtab %}
+{% endtabs %}
+
+Añadimos las etiquetas respectivas en nuestro componente create-task, para darle forma a nuestro formulario.
+
+{% tabs %}
+{% tab title="create-task.html" %}
+```markup
+<form class="form" novalidate> 
+  <header>
+      <h3>Añadir Tarea</h3>
+  </header>
+  <section> 
+    <mat-form-field class="form__fields__item" appearance="fill">
+      <mat-label>Fecha</mat-label>
+      <input matInput placeholder="Fecha" formControlName="date" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Seleccione una prioridad</mat-label>
+      <select matNativeControl name="priority" formControlName="priority">
+        <option value="" selected></option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" color="primary">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        >
+      </textarea>
+    </mat-form-field>
+    
+    <button mat-raised-button color="primary">Crear</button>
+  </section>
+</form> 
+```
+{% endtab %}
+{% endtabs %}
+
+Podremos un poco de estilos
+
+{% tabs %}
+{% tab title="create-task.component.scss" %}
+```css
+.form {
+  background-color: white;
+  border-radius: .5em;
+  box-shadow: none;
+  margin: 3em auto 0;
+  padding: 1em;
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+    &__item {
+      flex: 1;
+      padding-right: .5em;
+
+      .mat-icon {
+        padding-right: .5em;
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    &__title {
+      text-align: center;
+    }
+    &__close-button {
+      border: 0;
+      box-shadow: none;
+      position: relative;
+      top: -10px;
+    }
+  }
+
+  @media (min-width: 960px) {
+    box-shadow: .1em .1em .5em lightgrey;
+    width: 50%;
+    &__fields {
+      align-items: center;
+      flex-direction: row;
+      &__item {
+        flex: 1 40%;
+      }
+      &__button {
+        margin: 0 auto;
+        width: 50%;
+      }
+    }
+
+    &__header {
+      flex-direction: row;
+      &__button {
+        min-width: 20%;
+      }
+      h1 {
+        text-align: left;
+      }
+    }
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Si colocamos nuestro nuevo componente en el board.component, tal vez nuestra aplicación no se verá muy linda.
+
+{% tabs %}
+{% tab title="board.component.html" %}
+```markup
+...
+<app-create-task></app-create-task>
+...
+```
+{% endtab %}
+{% endtabs %}
+
+![](../../.gitbook/assets/screen-shot-2021-02-28-at-3.38.37-pm.png)
+
+
+
 
 
