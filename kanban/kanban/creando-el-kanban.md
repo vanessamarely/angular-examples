@@ -190,7 +190,7 @@ Colocaremos un poco de formato, para que nuestra aplicación vaya luciendo mejor
 ```markup
 
 <mat-toolbar color="primary" class="toolbar">
-  <span>Platzi Tablero</span>
+  <span>Kanban</span>
   <span class="toolbar__spacer"></span>
   <nav class="toolbar__menu">
     <ul>
@@ -308,5 +308,5 @@ En la vista de app.component.html vamos a incluir nuestro componente header, foo
 {% endtab %}
 {% endtabs %}
 
-![](../../.gitbook/assets/screen-shot-2021-02-27-at-11.43.06-pm.png)
+![](../../.gitbook/assets/screen-shot-2021-02-28-at-10.19.27-am.png)
 
