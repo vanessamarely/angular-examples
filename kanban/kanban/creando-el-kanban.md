@@ -481,7 +481,7 @@ Nuestra página se verá así:
 
 Nuestro Board tiene tres columnas, que es donde se mostraran las tareas respectivas, necesitamos un componente de presentacion para la lista y otro para las tareas.
 
-Primero crearemos nuestro componente lista, en una crpeta de componentes dentro de nuestro Board Module 
+Primero crearemos nuestro componente lista, en una carpeta de componentes dentro de nuestro Board Module 
 
 ```bash
 ng g c board/components/list
@@ -552,9 +552,42 @@ Pondremos un poco de estilo a nuestra lista
 
 ![](../../.gitbook/assets/screen-shot-2021-02-28-at-12.57.22-pm.png)
 
-En nuestra aplicación usaremos data mockeada, entonces crearemos un servicio mock y lo incluiremos en uestro contenedor para pasar la data a los componentes de presentación.
+En nuestra aplicación usaremos data mockeada, entonces crearemos un servicio mock y lo incluiremos en nuestro contenedor para pasar la data a los componentes de presentación.
 
+Para la data mockeada podemos crear un json o crear un API mock en [mocky.io](https://designer.mocky.io/) para luego consumirla en tu servicio.
 
+Creamos un servicio en el Core module.
+
+```bash
+ng g s core/services/api
+```
+
+Creamos un index para exportar los servicios que crearemos en el core.
+
+```bash
+export * from './api.service';
+```
+
+Incluimos nuestra API en el Core Module
+
+{% tabs %}
+{% tab title="core.module.ts" %}
+```typescript
+import { ApiService } from './services';
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule
+  ],
+  providers: [
+    ApiService
+  ]
+})
+export class CoreModule { }
+```
+{% endtab %}
+{% endtabs %}
 
 
 
