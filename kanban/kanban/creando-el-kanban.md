@@ -433,6 +433,129 @@ const routes: Routes = [
 {% endtab %}
 {% endtabs %}
 
+Al dar clic sobre los links del header aún no pasa la redirección, es porque en el "Shared" modulo debemos agregar el "RouterModule", para que funcionen las directivas en el header.
+
+{% tabs %}
+{% tab title="shared.module.ts" %}
+```typescript
+import { RouterModule } from '@angular/router';
+
+@NgModule({
+  declarations: [declarables],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialCdkModule,
+  ],
+  exports: declarables,
+})
+export class SharedModule { }
+```
+{% endtab %}
+{% endtabs %}
+
+Al haver clic en cada link, ahora si ocurre la redirección. Al crear nuestro header  colocamos el icnono fuera de los anchore, vamos a inclurilos en el anchore y a colocar un pequeño estilo para el link activo.
+
+{% tabs %}
+{% tab title="header.component.scss" %}
+```css
+...
+&__text {
+  color: white;
+  text-decoration: none;
+  vertical-align: middle;
+  &.active {
+    text-decoration: underline ;
+  }
+}
+...
+```
+{% endtab %}
+{% endtabs %}
+
+Nuestra página se verá así:
+
+![](../../.gitbook/assets/board1.gif)
+
+## 3. Creando componentes
+
+Nuestro Board tiene tres columnas, que es donde se mostraran las tareas respectivas, necesitamos un componente de presentacion para la lista y otro para las tareas.
+
+Primero crearemos nuestro componente lista, en una crpeta de componentes dentro de nuestro Board Module 
+
+```bash
+ng g c board/components/list
+```
+
+Incluimos nuestro componente list en el contanedor del board.
+
+{% tabs %}
+{% tab title="board.component.html" %}
+```markup
+<main class="board">
+  <app-list></app-list>
+</main>
+```
+{% endtab %}
+{% endtabs %}
+
+Como mencionamos el componente list tendrá tareas, entonces crearemos nuestro componente tarea.
+
+```bash
+ng g c board/components/task
+```
+
+Añadimos en nuestro componente list el componente tarea
+
+{% tabs %}
+{% tab title="list.component.html" %}
+```markup
+<div
+	class="list"
+>
+	<h3 class="list__title"><strong>Titulo</strong></h3>
+	<div class="list__tasks">
+		<app-task></app-task>
+	</div>
+</div>
+```
+{% endtab %}
+{% endtabs %}
+
+Pondremos un poco de estilo a nuestra lista
+
+{% tabs %}
+{% tab title="list.component.scss" %}
+```css
+.list {
+  background-color: #f5f5f5ad;
+  border-radius: 10px;
+  box-shadow: 0.1em 0.1em 0.5em lightgrey;
+  height: 80vh;
+  margin: 5px;
+  padding: 1em;
+  width: 350px;
+    
+  &__title {
+    margin: 0;
+    padding: 16px 0;
+  }
+  
+  &__tasks {
+    height: 60vh;
+    overflow-y: auto;
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+![](../../.gitbook/assets/screen-shot-2021-02-28-at-12.57.22-pm.png)
+
+En nuestra aplicación usaremos data mockeada, entonces crearemos un servicio mock y lo incluiremos en uestro contenedor para pasar la data a los componentes de presentación.
+
+
+
 
 
  
