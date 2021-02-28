@@ -977,19 +977,17 @@ De tener más tareas en cada lista, podriamos moverlas por los diferentes estado
 ng g c board/components/create-task
 ```
 
-Crearemos un formulario reactivo, para ello necesitamos incluir en el app.module.ts el modelo de formulario.
+Crearemos un formulario reactivo, para ello necesitamos incluir en el board.module.ts el modelo de formulario.
 
 {% tabs %}
-{% tab title="app.module.ts" %}
+{% tab title="board.module.ts" %}
 ```typescript
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 ...
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  ...
   imports: [
   ...
   FormsModule,
@@ -1202,6 +1200,172 @@ Si colocamos nuestro nuevo componente en el board.component, tal vez nuestra apl
 {% endtabs %}
 
 ![](../../.gitbook/assets/screen-shot-2021-02-28-at-3.38.37-pm.png)
+
+Mientras ubicamos el formulario en el lugar correspondiente, crearemos una tributo que guardará la prioridad seleccionado de nuestro dropdown y otro para los valores que mostrará el dropdown.
+
+{% tabs %}
+{% tab title="create-task.component.ts" %}
+```typescript
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+type DropdownObject = {
+  value: string;
+  viewValue: string;
+};
+
+export class CreateTaskComponent implements OnInit {
+  createTask: FormGroup;
+  selectedPriority: string;
+  
+  priorities: DropdownObject[] = [
+    { value: 'urgent', viewValue: 'Urgente' },
+    { value: 'moderate', viewValue: 'Moderado' },
+    { value: 'low', viewValue: 'Bajo' },
+  ];
+  
+  ...
+  
+  ngOnInit(): void {
+    this.setForm();
+    this.selectedPriority = '';
+  }
+
+  setForm(): void {
+    this.createTask = this.fb.group({
+      date: [new Date(), Validators.required],
+      priority: ['urgent', Validators.required],
+      description: ['', Validators.required],
+    });
+  }
+
+  onFormAdd(form: TaskSchema): void {
+    if (this.createTask.valid) {
+      console.log('valid');
+    }
+  }
+```
+{% endtab %}
+{% endtabs %}
+
+En el html del create-task pondremos los binding, atributos y las directivas necesarias para que nuestro formulario funcione.
+
+{% tabs %}
+{% tab title="create-task.component.html" %}
+```markup
+<form class="form" [formGroup]="createTask"  (ngSubmit)="onFormAdd(createTask.value)" novalidate> 
+  <header class="form__header">
+      <h3 class="form__header__title">Añadir Tarea</h3>
+  </header>
+  <section class="form__fields"> 
+    <mat-form-field class="form__fields__item" appearance="fill">
+      <mat-label>Fecha</mat-label>
+      <input matInput placeholder="Fecha" formControlName="date" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>
+        Fecha es <strong>requerida</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__fields__item" appearance="fill">
+      <mat-label>Seleccione una prioridad</mat-label>
+      <select matNativeControl [(ngModel)]="selectedPriority"  name="priority" formControlName="priority">
+        <option value="" selected></option>
+        <option *ngFor="let priority of priorities" [value]="priority.value">
+          {{priority.viewValue}}
+        </option>
+      </select>
+      <mat-error>
+        Prioridad es <strong>requerida</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__fields__item" appearance="fill" color="primary">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+      >
+      </textarea>
+      <mat-error>
+        Descripcion es <strong>requerida</strong>
+      </mat-error>
+    </mat-form-field>
+    
+    <button class="form__fields__button" mat-raised-button color="primary" [disabled]="!createTask.valid">Crear</button>
+  </section>
+</form> 
+```
+{% endtab %}
+{% endtabs %}
+
+La idea es que al presionar un boton para crear la tarea podamos en un overlay ver nuestro formulario, para hacer uso del Overlay, vamos a importar en material-cdk el elemento, ademas de importar un componente que usaremos en el formulario de creación para que Textarea de nuestro formulario tengo un crecimiento dinámico.
+
+{% tabs %}
+{% tab title="material-cdk.module.ts" %}
+```typescript
+import { OverlayModule } from '@angular/cdk/overlay';
+import { TextFieldModule } from '@angular/cdk/text-field';
+
+
+const components = [
+  ...
+  DragDropModule,
+  OverlayModule,
+  TextFieldModule
+];
+```
+{% endtab %}
+{% endtabs %}
+
+Añadamos las directivas y atributos necesarios en nuestro componente de Textarea
+
+{% tabs %}
+{% tab title="create-task.component.html" %}
+```markup
+<textarea
+matInput
+formControlName="description"
+cdkTextareaAutosize
+#autosize="cdkTextareaAutosize"
+cdkAutosizeMinRows="1"
+cdkAutosizeMaxRows="5"
+>
+```
+{% endtab %}
+{% endtabs %}
+
+En el componente incluiremos unas dependencias que necesitamos para este comportamiento del CDK en el texarea.
+
+{% tabs %}
+{% tab title="create-task.component.ts" %}
+```typescript
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
+...
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { take } from 'rxjs/operators';
+
+...
+
+@Component({
+  selector: 'app-create-task',
+  templateUrl: './create-task.component.html',
+  styleUrls: ['./create-task.component.scss'],
+})
+export class CreateTaskComponent implements OnInit {
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
+  ...
+  constructor(private fb: FormBuilder, private _ngZone: NgZone) {}
+  ...
+  triggerResize() {
+    // Wait for changes to be applied, then trigger textarea resize.
+    this._ngZone.onStable
+      .pipe(take(1))
+      .subscribe(() => this.autosize.resizeToFitContent(true));
+  }
+```
+{% endtab %}
+{% endtabs %}
 
 
 
