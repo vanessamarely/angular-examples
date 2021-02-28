@@ -24,7 +24,7 @@ Lo mejor es que podrás personalizar tu tablero y hacer volar tu imaginación pa
 * Arquitectura de componentes
 * Arquitectura Modular
 
-     2. Creando el Kanban
+     2. Creando el Kanban Board
 
 
 
