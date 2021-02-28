@@ -683,7 +683,7 @@ export class ApiService {
   
   constructor(private http: HttpClient) { }
 
-  /* Get Api Data from mock service */
+ /* Get Api Data from mock service */
   getApi() {
     return this.http
       .get<Array<{}>>(this.apiRoot)
@@ -691,7 +691,7 @@ export class ApiService {
   }
 
   /* Handle request error */
-  private handleError(res: HttpErrorResponse | any): any {
+  private handleError(res: HttpErrorResponse){
     return observableThrowError(res.error || 'Server error');
   }
 }
@@ -705,7 +705,7 @@ Creare dos interfaces para las tareas y la lista, en una carpeta llamada models.
 export interface TaskSchema {
   id: string;
   description: string;
-  date: any;
+  date: string;
   priority: string;
 }
 ```
@@ -740,10 +740,236 @@ Haremos uso de nuestro servicio en nuestro contenedor board.
 {% tabs %}
 {% tab title="board.component.ts" %}
 ```typescript
+import { Component, OnInit } from '@angular/core';
 import { ApiService, ListSchema } from './../../core';
+@Component({
+  selector: 'app-board',
+  templateUrl: './board.component.html',
+  styleUrls: ['./board.component.scss'],
+})
+export class BoardComponent implements OnInit {
+  lists: ListSchema[];
 
+  constructor(private apiService: ApiService) {
+    this.lists = [];
+  }
+
+  ngOnInit(): void {
+    this.getDataList();
+  }
+
+  getDataList(): void {
+    this.apiService.getApi().subscribe(
+      (response: any) => this.lists = response['list'],
+      error => console.log('Ups! we have an error: ', error)
+    );
+  }
+}
 
 ```
 {% endtab %}
 {% endtabs %}
+
+Pasamos la data a nuestro componente list.
+
+{% tabs %}
+{% tab title="board.component.html" %}
+```markup
+<main class="board">
+  <app-list 
+  *ngFor="let list of lists"
+  [list]="list"
+></app-list>
+</main>
+```
+{% endtab %}
+{% endtabs %}
+
+Añadamos algo de estilos en el board.
+
+{% tabs %}
+{% tab title="board.component.scss" %}
+```css
+.board {
+  display: flex;
+  height: 80vh;
+  overflow-x: auto;
+  padding: 0 1em;
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Mostraremos la data que recibimos en el componente list.
+
+{% tabs %}
+{% tab title="list.component.ts" %}
+```typescript
+...
+import { ListSchema } from "./../../../core";
+
+@Component({
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss']
+})
+export class ListComponent implements OnInit {
+  @Input() list: ListSchema;
+
+  constructor() {
+   }
+   ...
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="list.component.html" %}
+```markup
+<div
+	class="list"
+	id="list_{{list.id}}"
+>
+	<h3 class="list__title"><strong>{{list.name}}</strong></h3>
+	<div class="list__tasks">
+		<app-task *ngFor="let task of list.tasks" [task]="task"></app-task>
+	</div>
+</div>
+```
+{% endtab %}
+{% endtabs %}
+
+Editaremos el componente 'task' para recibir la data del componente list
+
+```typescript
+import { TaskSchema } from "./../../../core";
+
+export class TaskComponent implements OnInit {
+  @Input() task: TaskSchema;
+  ...
+```
+
+{% tabs %}
+{% tab title="task.component.html" %}
+```typescript
+<div 
+  class="task"
+  id="task_{{task.id}}"
+  [ngClass]="{'task--urgent': task.priority === 'urgent', 'task--moderate': task.priority === 'moderate', 'task--low': task.priority === 'low'}"
+  >
+  <div class="task__icon">
+    <mat-icon aria-hidden="false" aria-label="urgent icon" *ngIf="task.priority === 'urgent'">alarm</mat-icon>
+    <mat-icon aria-hidden="false" aria-label="medium icon" *ngIf="task.priority === 'moderate'">autorenew</mat-icon>
+    <mat-icon aria-hidden="false" aria-label="medium icon" *ngIf="task.priority === 'low'">assignment_returned</mat-icon>
+  </div>
+  <h3 class="task__title">Tarea</h3>
+  <p class="task__date"><strong>Fecha de finalización:</strong> {{ task.date | date }}</p>
+  <p class="task__description">{{task.description}}</p>
+</div>
+```
+{% endtab %}
+{% endtabs %}
+
+Así se ve nuestra app hasta ahora
+
+![](../../.gitbook/assets/screen-shot-2021-02-28-at-2.52.23-pm.png)
+
+Si jugamos con los diferentes mocks, vamos a ver como podemos tener mas tareas.
+
+Vamos a añadir el componente del Drag&Drop del CDK para mover las tareas, en las diferentes listas. Incluimos el componente en el material-cdk.module.ts
+
+{% tabs %}
+{% tab title="material-cdk.ts" %}
+```typescript
+//CDK
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+const components = [MatToolbarModule, MatIconModule, DragDropModule];
+...
+```
+{% endtab %}
+{% endtabs %}
+
+Devemos importar el Modulo de matrial-cdk en el modulo Board
+
+{% tabs %}
+{% tab title="board.module.ts" %}
+```typescript
+...
+import { MaterialCdkModule } from './../material-cdk/material-cdk.module';
+...
+@NgModule({
+  ...  
+  imports: [
+    ...
+    MaterialCdkModule..
+    .
+```
+{% endtab %}
+{% endtabs %}
+
+Usaremos ciertas directivas del Drag&Drop y funciones.
+
+{% tabs %}
+{% tab title="board.component.html" %}
+```markup
+<main class="board" cdkDropListGroup>
+  ...
+</main>
+
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="list.component.html" %}
+```markup
+<div
+	class="list"
+	id="list_{{list.id}}"
+	cdkDropList
+	[cdkDropListData]="list.tasks"
+	(cdkDropListDropped)="drop($event)"
+>
+	...
+	<div class="list__tasks">
+		<app-task *ngFor="let task of list.tasks" [task]="task" cdkDrag></app-task>
+	</div>
+</div>
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="list.component.ts" %}
+```typescript
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+...
+@Component({
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss'],
+})
+export class ListComponent implements OnInit {
+...
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
+  }
+...
+```
+{% endtab %}
+{% endtabs %}
+
+En nuestra página podremos arrastrar nuestra tarea.
+
+![](../../.gitbook/assets/board2.gif)
+
+
 
