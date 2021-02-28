@@ -876,6 +876,8 @@ Así se ve nuestra app hasta ahora
 
 Si jugamos con los diferentes mocks, vamos a ver como podemos tener mas tareas.
 
+### Componente Drag&Drop
+
 Vamos a añadir el componente del Drag&Drop del CDK para mover las tareas, en las diferentes listas. Incluimos el componente en el material-cdk.module.ts
 
 {% tabs %}
@@ -970,6 +972,8 @@ export class ListComponent implements OnInit {
 En nuestra página podremos arrastrar nuestra tarea.
 
 ![](../../.gitbook/assets/board2.gif)
+
+### Crear Tarea
 
 De tener más tareas en cada lista, podriamos moverlas por los diferentes estados en los que tendríamos nuestras tareas, ahora creemos un componente que nos permita crear las tareas. Con el angular-cli creemos nuestro componente.
 
@@ -1495,6 +1499,8 @@ Revisando en nuestra aplicación cuando llamemos al overlay, podemos ver en el f
 
 ![](../../.gitbook/assets/board4.gif)
 
+### Editar Tarea
+
 Hemos creado la funcionalidad para crear tareas, ahora crearemos la funcionalidad para editar una tarea.
 
 En el componente tarea, crearemos un icono que al ser presionado nos permitirá editar nuestra tarea.
@@ -1524,11 +1530,170 @@ handleEditTask(task: TaskSchema){
 {% endtab %}
 {% endtabs %}
 
-Queremos que al presionar el icono podamos editar nuestra tarea emitiendo el evento al padre.
+Queremos que al presionar el icono podamos editar nuestra tarea emitiendo el evento al padre, y queremos llamar al overlay mostrando la información de la tarea seleccionada. Ya emitimos la data desde el hijo tarea, ahora necesitamos desde el hijo lista, emitirla al padre, para que este pase la data al componente de crear.
 
+{% tabs %}
+{% tab title="list.component.html" %}
+```markup
+<div class="list__tasks">
+    <app-task *ngFor="let task of list.tasks" [task]="task" (editTask)="handleEdit(task)" cdkDrag></app-task>
+</div>
+```
+{% endtab %}
+{% endtabs %}
 
+{% tabs %}
+{% tab title="list.compoennt.ts" %}
+```typescript
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+...
+@Output() editTask: EventEmitter<TaskSchema> = new EventEmitter();
+...
+handleEdit(task: TaskSchema){
+    this.editTask.emit(task);
+}
+```
+{% endtab %}
+{% endtabs %}
 
+En el padre en el componente board, vamos  crear un atributo task que será el que pasaremos al create-task y el cual editaremos dentro de la funcion que muestra el overlay.
 
+{% tabs %}
+{% tab title="board.component.html" %}
+```markup
+<main class="board" cdkDropListGroup>
+  <button
+    class="board__add"
+    cdkOverlayOrigin
+    (click)="displayOverlay()"
+    #trigger="cdkOverlayOrigin"
+    mat-raised-button
+    color="primary"
+  >
+    Añadir Tarea
+  </button>
+  <section class="board__list">
+    <app-list *ngFor="let list of lists" [list]="list" (editTask)="displayOverlay($event)"></app-list>
+  </section>
+  <ng-template
+    #connectedOverlay="cdkConnectedOverlay"
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOverlayDisplayed"
+    [cdkConnectedOverlayHasBackdrop]="overlayOptions.hasBackdrop"
+    [cdkConnectedOverlayPositions]="overlayOptions.positions"
+    (backdropClick)="hideOverlay()"
+    (detach)="hideOverlay()"
+  >
+    <app-create-task [connectedOverlay]="connectedOverlay" [task]="task"></app-create-task>
+  </ng-template>
+</main>
+
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="board.component.ts" %}
+```typescript
+import { ApiService, ListSchema, TaskSchema } from './../../core';
+...
+const initialValue = {
+  id: '',
+  description: '',
+  date: '',
+  priority: '',
+};
+...
+task: TaskSchema;
+...
+constructor(private apiService: ApiService) {
+  this.task = initialValue;
+}
+...
+displayOverlay(event?: any): void {
+  this.isOverlayDisplayed = true;
+  if (!!event) {
+    this.task = {
+      date: event.date,
+      id: event.id,
+      description: event.description,
+      priority: event.priority,
+    };
+  } else {
+    this.task = initialValue;
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+En el componente create-task vamos a editar el componente para recibir la informacion de la tarea, ademas crearemos un atributo que manera el texto del titulo y del boton, dependiendo si se esta editando o creando.
+
+{% tabs %}
+{% tab title="create-task.component.ts" %}
+```typescript
+ ... 
+  @Input() task?: TaskSchema;
+  formText: string;
+  ...
+  ngOnInit(): void {
+    this.setForm();
+    this.selectedPriority = '';
+    if (this.task && this.task.id.length > 0) {
+      this.setValuesOnForm(this.task);
+      this.formText = 'Editar';
+      this.selectedPriority = this.task.priority;
+    } else {
+      this.formText = 'Crear';
+    }
+  }
+  ...
+  onFormAdd(form: TaskSchema): void {
+    if (this.createTask.valid) {
+      console.log('valid');
+      this.close();
+    } else {
+      console.log('editada');
+      this.close();
+    }
+  }
+
+  setValuesOnForm(form: TaskSchema): void {
+    this.createTask.setValue({
+      date: new Date(form.date),
+      priority: form.priority,
+      description: form.description 
+   });
+  }
+  ...
+```
+{% endtab %}
+{% endtabs %}
+
+En la vista del create-task vamos a colocar el atributo que manejara el texto del titulo y del botón
+
+{% tabs %}
+{% tab title="create-task.component.html" %}
+```markup
+...
+<h3 class="form__header__title">{{ formText }} Tarea</h3>
+...
+<button
+    class="form__fields__button"
+    mat-raised-button
+    color="primary"
+    [disabled]="!createTask.valid"
+>
+{{formText}}
+</button>
+```
+{% endtab %}
+{% endtabs %}
+
+![](../../.gitbook/assets/board6.gif)
+
+### Eliminar Tarea
 
 
 
