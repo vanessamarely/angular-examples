@@ -1855,3 +1855,495 @@ Ahora tenemos con la data mockeada un CRUD, para crear, editar y eliminar nuestr
 
 ![](../../.gitbook/assets/board7.gif)
 
+## 4. Modificando el Home
+
+En nuestro Modulo de Home queremos que aparezca una especie de resumén de las tareas que estamos creando, vamos a poner un poco de html en la vista para mostrar las tareas que tenemos creadas.
+
+{% tabs %}
+{% tab title="home.component.html" %}
+```markup
+<main class="home">
+  <h1 class="home__title">Kanban</h1>
+  <p>En nuestro día a día siempre tenemos que realizar diferentes tipos de tareas y priorizarlas y dejarlas por escrito nos ayuda a abordarlas mucho más rápido y lograr su realización</p>
+  <p>Por ello en este tablero te invitamos a organizar tu día a día</p>
+  <section>
+    <h2>Lista de tareas</h2>
+    <div class="home__task-list">
+      <mat-task class="home__task-list__task" *ngFor="let task of taskList">
+        <mat-task-header>
+          <mat-task-title>
+            <div class="task__task-list__icon">
+              <mat-icon aria-hidden="false" aria-label="urgent icon" *ngIf="task.priority === 'urgent'">alarm</mat-icon>
+              <mat-icon aria-hidden="false" aria-label="medium icon" *ngIf="task.priority === 'moderate'">autorenew</mat-icon>
+              <mat-icon aria-hidden="false" aria-label="medium icon" *ngIf="task.priority === 'low'">assignment_returned</mat-icon>
+              <span>Tarea</span>
+            </div>
+          </mat-task-title>
+          <mat-task-subtitle class="task__task-list__subtitle"><strong>Fecha de finalización:</strong> {{ task.date | date }}</mat-task-subtitle>
+        </mat-task-header>
+        <mat-task-content>
+          <p class="task__task-list__description">
+            {{task.description}}
+          </p>
+        </mat-task-content>
+      </mat-task>
+    </div>
+  </section>
+</main>
+```
+{% endtab %}
+{% endtabs %}
+
+En el home.component.ts vamos a consumir la api, para mostrar las tareas en nuestro componente y usaremos la data mockeada.
+
+{% tabs %}
+{% tab title="home.component.ts" %}
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { ApiService, ListSchema, TaskSchema } from './../../core';
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit {
+  taskList: TaskSchema[];
+
+  constructor(private apiService: ApiService) { }
+
+  ngOnInit(): void {
+    this.getPrioritiesTask();
+  }
+  
+  getPrioritiesTask(): void {
+    this.apiService.getApi()
+      .subscribe(
+        (response: any) => {
+          const lists = response['list'];
+          let tasks: TaskSchema[] = [];
+          lists.map((element: ListSchema) => {
+            console.log(element)
+            element.tasks.map(task => {
+              if(task.priority == 'urgent'){
+                tasks.push(task)
+              }
+            });
+          });
+          this.taskList = tasks;
+        },
+        error => (console.log('Ups! we have an error: ', error))
+    );
+  }
+}
+
+```
+{% endtab %}
+{% endtabs %}
+
+Añadiremos un poco de estilos al Home.
+
+{% tabs %}
+{% tab title="home.component.scss" %}
+```css
+.home {
+  padding: 2em;
+  &__title {
+    text-align: center;
+  }
+  &__task-list {
+    display: flex;
+    flex-wrap: wrap;
+    
+    &__task {
+      min-width: 30%;
+      margin: 1em;
+    }
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+En el componente se esta haciendo uso de algunos elementos del modulo de Material, incluiremos el modulo material-cdk en el modulo del Home.
+
+{% tabs %}
+{% tab title="home.module.ts" %}
+```typescript
+...
+import { MaterialCdkModule } from './../material-cdk/material-cdk.module';
+...
+imports: [
+    ...
+    MaterialCdkModule,
+  ]
+```
+{% endtab %}
+{% endtabs %}
+
+![](../../.gitbook/assets/screen-shot-2021-02-28-at-10.28.07-pm.png)
+
+Nuestro home no se ve muy bonito ni funcional, colocaremos 3 botones, para que al dar clic a algunos de ellos podamos ver las tareas por cada una de las prioridades, editaremos un poco la vista y la lógica del componente.
+
+{% tabs %}
+{% tab title="home.component.html" %}
+```markup
+<main class="home">
+  <h1 class="home__title">Kanban</h1>
+  <p>
+    En nuestro día a día siempre tenemos que realizar diferentes tipos de tareas
+    y priorizarlas y dejarlas por escrito nos ayuda a abordarlas mucho más
+    rápido y lograr su realización
+  </p>
+  <p>Por ello en este tablero te invitamos a organizar tu día a día</p>
+  <section class="home__task-list">
+    <h2 class="home__task-list__title">Lista de tareas</h2>
+    <div class="home__task-list__buttons">
+      <button
+        class="option-button"
+        mat-button
+        mat-raised-button
+        (click)="getPrioritiesTask('urgent')"
+      >
+        <mat-icon aria-hidden="false" aria-label="urgent icon">alarm</mat-icon
+        >Urgentes
+      </button>
+      <button
+        class="option-button"
+        mat-button
+        mat-raised-button
+        (click)="getPrioritiesTask('moderate')"
+      >
+        <mat-icon aria-hidden="false" aria-label="medium icon"
+          >autorenew</mat-icon
+        >Moderadas
+      </button>
+      <button
+        class="option-button"
+        mat-button
+        mat-raised-button
+        (click)="getPrioritiesTask('low')"
+      >
+        <mat-icon aria-hidden="false" aria-label="medium icon"
+          >assignment_returned</mat-icon
+        >Bajas
+      </button>
+    </div>
+    <div class="home__task-list__container">
+      <mat-task class="task" *ngFor="let task of taskList">
+        <mat-task-header
+          [ngClass]="{
+            'task__header task__header--urgent': task.priority === 'urgent',
+            'task__header task__header--moderate': task.priority === 'moderate',
+            'task__header task__header--low': task.priority === 'low'
+          }"
+        >
+          <mat-task-title class="task-title">
+            <div class="task-title__icon">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="urgent icon"
+                *ngIf="task.priority === 'urgent'"
+                >alarm</mat-icon
+              >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="medium icon"
+                *ngIf="task.priority === 'moderate'"
+                >autorenew</mat-icon
+              >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="medium icon"
+                *ngIf="task.priority === 'low'"
+                >assignment_returned</mat-icon
+              >
+              <span>Tarea</span>
+            </div>
+          </mat-task-title>
+          <mat-task-subtitle class="task__task-list__subtitle"
+            ><strong>Fecha de finalización:</strong>
+            {{ task.date | date }}</mat-task-subtitle
+          >
+        </mat-task-header>
+        <mat-task-content class="task__content">
+          <p class="task__task-list__description">
+            {{ task.description }}
+          </p>
+        </mat-task-content>
+      </mat-task>
+    </div>
+  </section>
+</main>
+
+
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="home.component.ts" %}
+```typescript
+...
+ ngOnInit(): void {}
+ ...
+ getPrioritiesTask(priorityType: string): void {
+    this.apiService.getApi().subscribe(
+      (response: any) => {
+        const lists = response['list'];
+        let tasks: TaskSchema[] = [];
+        lists.map((element: ListSchema) => {
+          element.tasks.map((task) => {
+            if (task.priority === priorityType) {
+              tasks.push(task);
+            }
+          });
+        });
+        this.taskList = tasks;
+      },
+      (error) => console.log('Ups! we have an error: ', error)
+    );
+  }
+  ...
+```
+{% endtab %}
+{% endtabs %}
+
+Editaremos un poco los estilos.
+
+{% tabs %}
+{% tab title="home.component.scss" %}
+```css
+@mixin header {
+  display: block;
+  padding: 1em;
+}
+
+.home {
+  padding: 2em;
+  margin-bottom: 6em;
+  &__title {
+    border-bottom: 1px solid #d3d3d3;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2);
+    font-size: 3em;
+    padding-bottom: .5em;
+    text-align: center;
+  }
+  &__task-list {
+    &__buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      .option-button {
+        min-width: 30%;
+      }
+    }
+    &__container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .task {
+        border-radius: 5px;
+        box-shadow: 0.1em 0.1em 0.5em lightgrey;
+        margin: 1em;
+        padding: 1em;
+
+        &__header {
+          
+          &--urgent {
+            border-bottom: 5px solid salmon;
+            @include header;
+          }
+        
+          &--moderate {
+            border-bottom: 5px solid lightseagreen;
+            @include header;
+          }
+        
+          &--low {
+            border-bottom: 5px solid lightgoldenrodyellow;
+            @include header;
+          }
+
+          .task-title {
+            &__icon {
+              margin-right: .5em;
+              vertical-align: middle;
+            }
+
+          }
+        }
+
+        &__content{
+          display: block;
+          padding: 1em;
+        }
+      }
+    }
+    
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+Incluiremos un mensaje que se mostrará cuando no hayan tareas en una de las prioridades seleccionadas.
+
+{% tabs %}
+{% tab title="home.component.html" %}
+```markup
+<div class="home__task-list__message" *ngIf="taskList?.length == 0">
+    <p class="text">No hay elementos para mostrar</p>
+</div>
+```
+{% endtab %}
+{% endtabs %}
+
+Pondremos algunos estilos para nuestro mensaje
+
+{% tabs %}
+{% tab title="home.component.scss" %}
+```css
+&__message {
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  margin-top: 2em;
+  padding: 2em;
+  .text {
+    font-size: 1.5em;
+    text-align: center;
+  }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+![](../../.gitbook/assets/board8.gif)
+
+## 5. Servicio para las Tareas
+
+Crearemos un servicio para las tareas, primero con el angular-cli crearemos un servicio, haremos uso del BehaviorSubject para manejar el flujo de nuestras tareas.
+
+```bash
+ng g s core/services/task
+```
+
+En el servicio usaremos el BehaviorSubject, crearemos varias funciones para manejar el crear, editar y eliminar. Ademas crearemos algunos atributos para los observables y para manejar el flujo de la tarea. Tambien incluiremos el servicio Api, para cargar una data inicial.
+
+{% tabs %}
+{% tab title="task.service.ts" %}
+```typescript
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ApiService, TaskSchema, ListSchema } from '../';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TaskService {
+  private readonly boardList = new BehaviorSubject<ListSchema[]>([]);
+  readonly list$ = this.boardList.asObservable();
+  readonly getBoardList$ = this.list$.pipe(
+    map(list => list)
+  );
+
+  constructor(private apiService: ApiService) { 
+    this.loadInitialData();
+  }
+
+  /* Load initial data to render in a component */
+  loadInitialData(): any {
+    return this.apiService.getApi()
+      .subscribe((response: any) => {
+        if(!!response) {
+          this.boardList.next(response['list']);
+        }
+      })  
+  }
+
+  /* getter list of Board */
+  get list(): ListSchema[] {
+    return this.boardList.getValue();
+  }
+
+  /* setter list of Board */
+  set list(value: ListSchema[]) {
+    this.boardList.next(value);
+  }
+
+  /* Add new card to board list */
+  addCard(data: TaskSchema, list: ListSchema): void  {
+    const card = data;
+    const elementsIndex = 
+      this.list.findIndex(element => element.id == list.id);
+    this.list[elementsIndex].tasks.push(card);
+  }
+
+  /* Edit card on list */
+  updateTask(data: TaskSchema, list: ListSchema): void {
+    const tasks = list.tasks.map(element => {
+      if(element.id === data.id){
+        element.date = new Date(data.date);
+        element.description = data.description;
+        element.priority = data.priority;
+      }
+      return element;
+    });
+    const elementsIndex = 
+      this.list.findIndex(element => element.id == list.id);
+    this.list[elementsIndex].tasks = tasks;
+  } 
+
+  /* Remove a card of board list */
+  removeTask(dataId: string, list: ListSchema): void {
+    const elementsIndex = 
+      this.list.findIndex(element => element.id == list.id);
+    const tasks = this.list[elementsIndex].tasks.filter(card => card.id !== dataId);
+    this.list[elementsIndex].tasks = tasks;
+  }
+
+}
+
+```
+{% endtab %}
+{% endtabs %}
+
+En nuestro Board component crearemos una función que obtendra la data desde el servicio de tarea e importaremos el nuevo servicio.
+
+{% tabs %}
+{% tab title="board.component.ts" %}
+```typescript
+...
+import { TaskService } from './../../core/services/task.service';
+...
+constructor(private apiService: ApiService, private taskService: TaskService) {
+  this.task = initialValue;
+}
+
+ngOnInit(): void {
+  // this.getDataList();
+  this.getDataStored();
+}
+...
+getDataStored(): void {
+  this.taskService.getBoardList$
+    .subscribe(
+      (response: any) => this.lists = response,
+      (error: any) => (console.log('Ups! we have an error: ', error))
+  );
+}
+```
+{% endtab %}
+{% endtabs %}
+
+En el componente para crear la tarea vamos a hacer el llamado a nuestra tarea de servicio.
+
+```bash
+import { TaskService } from './../../../core/services/task.service';
+
+```
+
+
+
