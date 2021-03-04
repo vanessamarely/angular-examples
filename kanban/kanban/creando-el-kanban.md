@@ -2238,29 +2238,25 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ApiService, TaskSchema, ListSchema } from '../';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
   private readonly boardList = new BehaviorSubject<ListSchema[]>([]);
   readonly list$ = this.boardList.asObservable();
-  readonly getBoardList$ = this.list$.pipe(
-    map(list => list)
-  );
+  readonly getBoardList$ = this.list$.pipe(map((list) => list));
 
-  constructor(private apiService: ApiService) { 
+  constructor(private apiService: ApiService) {
     this.loadInitialData();
   }
 
   /* Load initial data to render in a component */
   loadInitialData(): any {
-    return this.apiService.getApi()
-      .subscribe((response: any) => {
-        if(!!response) {
-          this.boardList.next(response['list']);
-        }
-      })  
+    return this.apiService.getApi().subscribe((response: any) => {
+      if (!!response) {
+        this.boardList.next(response['list']);
+      }
+    });
   }
 
   /* getter list of Board */
@@ -2274,33 +2270,39 @@ export class TaskService {
   }
 
   /* Add new card to board list */
-  addCard(data: TaskSchema, list: ListSchema): void  {
+  addTask(data: TaskSchema): void {
     const card = data;
-    const elementsIndex = 
-      this.list.findIndex(element => element.id == list.id);
+    const elementsIndex = this.list.findIndex(
+      (element) => element.id === '1'
+    );
     this.list[elementsIndex].tasks.push(card);
   }
 
   /* Edit card on list */
-  updateTask(data: TaskSchema, list: ListSchema): void {
-    const tasks = list.tasks.map(element => {
-      if(element.id === data.id){
-        element.date = new Date(data.date);
-        element.description = data.description;
-        element.priority = data.priority;
-      }
-      return element;
-    });
-    const elementsIndex = 
-      this.list.findIndex(element => element.id == list.id);
-    this.list[elementsIndex].tasks = tasks;
-  } 
+  updateTask(data: TaskSchema, listId: string): void {
+    if (data) {
+      const elementsIndex = this.list.findIndex(
+        (element) => element.id === listId
+      );
+      const task = this.list[elementsIndex].tasks.map((element) => {
+        if (element.id === data.id) {
+          element.date = new Date(data.date);
+          element.description = data.description;
+          element.priority = data.priority;
+        }
+        return element;
+      });
+    }
+  }
 
   /* Remove a card of board list */
   removeTask(dataId: string, list: ListSchema): void {
-    const elementsIndex = 
-      this.list.findIndex(element => element.id == list.id);
-    const tasks = this.list[elementsIndex].tasks.filter(card => card.id !== dataId);
+    const elementsIndex = this.list.findIndex(
+      (element) => element.id == list.id
+    );
+    const tasks = this.list[elementsIndex].tasks.filter(
+      (task) => task.id !== dataId
+    );
     this.list[elementsIndex].tasks = tasks;
   }
 
@@ -2316,10 +2318,13 @@ En nuestro Board component crearemos una función que obtendra la data desde el 
 {% tab title="board.component.ts" %}
 ```typescript
 ...
-import { TaskService } from './../../core/services/task.service';
+import { TaskService } from 'src/app/core/services/task.service';
+...
+listId: string;
 ...
 constructor(private apiService: ApiService, private taskService: TaskService) {
   this.task = initialValue;
+  this.lists = [];
 }
 
 ngOnInit(): void {
@@ -2327,23 +2332,225 @@ ngOnInit(): void {
   this.getDataStored();
 }
 ...
+getDataList(): void {
+  this.apiService.getApi().subscribe(
+    ...
+    (error: string) => console.log('Ups! we have an error: ', error)
+  );
+}
+
 getDataStored(): void {
   this.taskService.getBoardList$
     .subscribe(
       (response: any) => this.lists = response,
-      (error: any) => (console.log('Ups! we have an error: ', error))
+      (error: string) => (console.log('Ups! we have an error: ', error))
   );
+}
+
+
+displayOverlay(event?: TaskSchema): void {
+...
+    if(event.listId){
+      this.listId = event.listId;
+    }
+...
+
+```
+{% endtab %}
+{% endtabs %}
+
+En la vista del board component añadimos el listId, que vamos a usarlo luego en nuestro servicio
+
+{% tabs %}
+{% tab title="board.component.html" %}
+```markup
+...
+<app-create-task [connectedOverlay]="connectedOverlay" [task]="task" [listId]="listId"></app-create-task>
+...
+```
+{% endtab %}
+{% endtabs %}
+
+En el componente para crear la tarea \(create-task.component.ts\) vamos a hacer el llamado a nuestra tarea de servicio, ademas vamos a incluir una función que crearemos en la carpeta utils, en el shared
+
+{% tabs %}
+{% tab title="helpers.ts" %}
+```typescript
+export const generateUniqueId = () => '_' + Math.random().toString(36).substr(2, 9);
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="index.ts" %}
+```typescript
+export * from './helpers';
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="create-task.component.ts" %}
+```typescript
+...
+import { TaskSchema, ListSchema } from 'src/app/core/';
+...
+import { TaskService } from 'src/app/core/services/task.service';
+import { generateUniqueId } from 'src/app/shared/utils/';
+...
+@Input() listId?: string;
+
+...
+constructor(
+  private fb: FormBuilder,
+  private _ngZone: NgZone,
+  private tasksService: TaskService
+) {}
+...
+if (this.task && this.task.id && this.task.id.length > 0) {
+
+...
+if (this.createTask.valid && this.task && !this.task.id) {
+  form.id = generateUniqueId();
+  this.tasksService.addTask(form);
+
+...
+} else if (this.task && this.listId){
+  const findPriority = this.priorities.find(
+    (element) => form.priority === element.value
+  );
+  form.id = this.task.id;
+  form.priority = !findPriority ? this.task.priority : form.priority;
+  form.date = new Date(form.date);
+  if (form.priority) {
+    this.tasksService.updateTask(form, this.listId);
+  }
+...
+
+```
+{% endtab %}
+{% endtabs %}
+
+En la vista de la lista vamos a incluir la lista como atributo en nuestra tarea para usarla en el servicio
+
+{% tabs %}
+{% tab title="list.component.html" %}
+```markup
+ <app-task
+ *ngFor="let task of list.tasks"
+ [task]="task"
+ [list]="list"
+ (editTask)="handleEdit(task)"
+ cdkDrag
+></app-task>
+
+```
+{% endtab %}
+{% endtabs %}
+
+En el componente de la lista tambien incluimos nuestro task service
+
+{% tabs %}
+{% tab title="list.component.ts" %}
+```typescript
+import { TaskService } from 'src/app/core/services/task.service';
+...
+constructor(public tasksService: TaskService) {}
+...
+handleEdit(task: TaskSchema){
+  if (this.list) {
+    task.listId = this.list.id;
+    this.editTask.emit(task);
+  }
+}
+
+```
+{% endtab %}
+{% endtabs %}
+
+En el componente tarea es donde incluimos el boton como icono para eliminar, por lo que tambien necesitamos llamar a nuestro servicio, para llamar a la funcionalidad de eliminar. En nuestro componente de tarea incluiremos el servicio.
+
+{% tabs %}
+{% tab title="task.component.ts" %}
+```typescript
+...
+import { ListSchema, TaskSchema } from './../../../core';
+...
+import { TaskService } from 'src/app/core/services/task.service';
+...
+@Input() list?: ListSchema;
+
+...
+constructor(public dialog: MatDialog, public tasksService: TaskService) {}
+...
+ngOnInit(): void {}
+...
+dialogRef.afterClosed().subscribe((result) => {
+  if (this.list) {
+    this.tasksService.removeTask(taskId, this.list);
+  }
+});
+```
+{% endtab %}
+{% endtabs %}
+
+En la interface de la tarea vamos a hacer una pequeña corrección al tipado
+
+{% tabs %}
+{% tab title="taskschema.ts" %}
+```typescript
+export interface TaskSchema {
+  id: string;
+  description: string;
+  date: Date | string;
+  priority: string;
+  listId?: string;
 }
 ```
 {% endtab %}
 {% endtabs %}
 
-En el componente para crear la tarea vamos a hacer el llamado a nuestra tarea de servicio.
+En el api de servicios usaremos el mock sin tareas, para usarlo con la tarea de los servicios
+
+{% tabs %}
+{% tab title="api.service.ts" %}
+```typescript
+export class ApiService {
+  //api with one task
+  //private apiRoot: string = 'https://run.mocky.io/v3/26045374-863c-469d-85c4-51ea1135ce8a';
+  //api without any task
+  private apiRoot: string = 'https://run.mocky.io/v3/7841d1af-e8d5-446a-bac5-3506fdd05659';
+  // api with many task
+  //private apiRoot: string = 'https://run.mocky.io/v3/0933ddef-c9bf-4f26-8ddf-77990fb490cb';
+}
+```
+{% endtab %}
+{% endtabs %}
+
+En el home component tambien incluiremos nuestro nuevo servicio, para traer las tareas que hemos creado en nuestro kanban.
 
 ```bash
-import { TaskService } from './../../../core/services/task.service';
-
+import { TaskService } from 'src/app/core/services/task.service';
+...
+constructor(private apiService: ApiService, private taskService: TaskService) {}
+...
+getPrioritiesTask(PriorityType: string): void {
+  this.taskService.getBoardList$
+    .subscribe(
+      (response: ListSchema[]) => {
+        const lists = response;
+        let tasks: TaskSchema[] = [];
+        lists.map((element: ListSchema )=> {
+          element.tasks.map((task: TaskSchema) => {
+            if(task.priority == PriorityType){
+              tasks.push(task)
+            }
+          });
+        });
+        this.taskList = tasks;
+      },
+      (error: string) => (console.log('Ups! we have an error: ', error))
+  );
+...
 ```
-
-
 
