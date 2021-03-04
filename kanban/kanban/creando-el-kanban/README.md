@@ -68,11 +68,11 @@ ng add @angular/material
 
 Seleccionamos un tema:
 
-![](../../.gitbook/assets/screen-shot-2021-02-27-at-10.09.18-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-10.09.18-pm.png)
 
 Configuramos la tipografia global y el browser animation de material.
 
-![](../../.gitbook/assets/screen-shot-2021-02-27-at-10.10.41-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-10.10.41-pm.png)
 
 En nuestro archivo **styles.scss** incluiremos los estilos del tema que acabamos de incluir
 
@@ -80,7 +80,7 @@ En nuestro archivo **styles.scss** incluiremos los estilos del tema que acabamos
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 ```
 
-![](../../.gitbook/assets/screen-shot-2021-02-27-at-10.13.21-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-10.13.21-pm.png)
 
 Creemos un módulo de material-cdk en el cual iremos importando los módulos de Material y de CDK
 
@@ -88,7 +88,7 @@ Creemos un módulo de material-cdk en el cual iremos importando los módulos de 
 ng g m material-cdk
 ```
 
-![](../../.gitbook/assets/screen-shot-2021-02-27-at-10.37.21-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-10.37.21-pm.png)
 
 ## 2. Creando nuestros modulos
 
@@ -297,7 +297,7 @@ En nuestro footer incluiremos otro toolbar, más sencillo y algunos estilos.
 
 Borremos el contenido de nuestra vista app:  app.component.html y coloquemos un hola!, si observamos en el navegador podemos ver la palabra Hola!
 
-![](../../.gitbook/assets/screen-shot-2021-02-27-at-11.27.55-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-27-at-11.27.55-pm.png)
 
 En la vista de app.component.html vamos a incluir nuestro componente header, footer y el router-outlet.
 
@@ -311,7 +311,7 @@ En la vista de app.component.html vamos a incluir nuestro componente header, foo
 {% endtab %}
 {% endtabs %}
 
-![](../../.gitbook/assets/screen-shot-2021-02-28-at-10.19.27-am.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-28-at-10.19.27-am.png)
 
 Ahora, crearemos nuestro modulo board con el routing, con el siguiente comando
 
@@ -475,7 +475,7 @@ Al haver clic en cada link, ahora si ocurre la redirección. Al crear nuestro he
 
 Nuestra página se verá así:
 
-![](../../.gitbook/assets/board1.gif)
+![](../../../.gitbook/assets/board1.gif)
 
 ## 3. Creando Componentes
 
@@ -550,7 +550,7 @@ Pondremos un poco de estilo a nuestra lista
 {% endtab %}
 {% endtabs %}
 
-![](../../.gitbook/assets/screen-shot-2021-02-28-at-12.57.22-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-28-at-12.57.22-pm.png)
 
 En nuestra aplicación usaremos data mockeada, entonces crearemos un servicio mock y lo incluiremos en nuestro contenedor para pasar la data a los componentes de presentación.
 
@@ -872,7 +872,7 @@ export class TaskComponent implements OnInit {
 
 Así se ve nuestra app hasta ahora
 
-![](../../.gitbook/assets/screen-shot-2021-02-28-at-2.52.23-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-28-at-2.52.23-pm.png)
 
 Si jugamos con los diferentes mocks, vamos a ver como podemos tener mas tareas.
 
@@ -971,7 +971,7 @@ export class ListComponent implements OnInit {
 
 En nuestra página podremos arrastrar nuestra tarea.
 
-![](../../.gitbook/assets/board2.gif)
+![](../../../.gitbook/assets/board2.gif)
 
 ### Crear Tarea
 
@@ -1203,7 +1203,7 @@ Si colocamos nuestro nuevo componente en el board.component, tal vez nuestra apl
 {% endtab %}
 {% endtabs %}
 
-![](../../.gitbook/assets/screen-shot-2021-02-28-at-3.38.37-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-28-at-3.38.37-pm.png)
 
 Mientras ubicamos el formulario en el lugar correspondiente, crearemos una tributo que guardará la prioridad seleccionado de nuestro dropdown y otro para los valores que mostrará el dropdown.
 
@@ -1459,7 +1459,7 @@ Reestructuraremos un poco los estilos del componente board.
 {% endtab %}
 {% endtabs %}
 
-![](../../.gitbook/assets/board3.gif)
+![](../../../.gitbook/assets/board3.gif)
 
 Al presionar el botón de crear, podemos llamar a nuestro overlay, pero no podemos cerrar en el caso de que no deseemos seguir con este proceso, para ello necesitamos añadir en nuestro componente de creación un boton para cerrar nuestro overlay.
 
@@ -1497,7 +1497,7 @@ Incluiremos el botón en nuestro html del create-task
 
 Revisando en nuestra aplicación cuando llamemos al overlay, podemos ver en el formulario un icono que al ser presionado, nos permitirá cerrar nuestro overlay.
 
-![](../../.gitbook/assets/board4.gif)
+![](../../../.gitbook/assets/board4.gif)
 
 ### Editar Tarea
 
@@ -1691,7 +1691,7 @@ En la vista del create-task vamos a colocar el atributo que manejara el texto de
 {% endtab %}
 {% endtabs %}
 
-![](../../.gitbook/assets/board6.gif)
+![](../../../.gitbook/assets/board6.gif)
 
 ### Eliminar Tarea
 
@@ -1853,7 +1853,7 @@ removeTask(taskId: string): void {
 
 Ahora tenemos con la data mockeada un CRUD, para crear, editar y eliminar nuestra tarea.
 
-![](../../.gitbook/assets/board7.gif)
+![](../../../.gitbook/assets/board7.gif)
 
 ## 4. Modificando el Home
 
@@ -1980,7 +1980,7 @@ imports: [
 {% endtab %}
 {% endtabs %}
 
-![](../../.gitbook/assets/screen-shot-2021-02-28-at-10.28.07-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-02-28-at-10.28.07-pm.png)
 
 Nuestro home no se ve muy bonito ni funcional, colocaremos 3 botones, para que al dar clic a algunos de ellos podamos ver las tareas por cada una de las prioridades, editaremos un poco la vista y la lógica del componente.
 
@@ -2218,7 +2218,7 @@ Pondremos algunos estilos para nuestro mensaje
 {% endtab %}
 {% endtabs %}
 
-![](../../.gitbook/assets/board8.gif)
+![](../../../.gitbook/assets/board8.gif)
 
 ## 5. Servicio para las Tareas
 
@@ -2578,13 +2578,13 @@ Al generar nuestra carpeta dist, el contenido que se genera es el que podemos pu
 
 Nos permite automatizar, personalizar y ejecutar el flujo de trabajo de nuestro proyecto para subirlo en un repositorio con GitHub actions.
 
-![](../../.gitbook/assets/screen-shot-2021-03-03-at-11.20.11-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-03-03-at-11.20.11-pm.png)
 
 ### Como despliego mi aplicación?
 
 Teniendo nuestra aplicación creada, y en nuestro repositorio de github, vamos a crear una rama con el nombre: **gh-pages**. Esta rama es la que configuramos para subir nuestros archivos de HTML, CSS y Javascript, que es la aplicación que quedará publicada.
 
-![](../../.gitbook/assets/screen-shot-2021-03-03-at-10.00.13-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-03-03-at-10.00.13-pm.png)
 
 Podemos crear nuestra rama directamente desde la página de GitHub o podemos desde nuestra terminal crear nuestra rama. La idea de esta rama es que este vacia, entonces es necesario limpiarla, para eso odemos hacer lo siguiente si hemos creado nuestro repo desde la web:
 
@@ -2680,11 +2680,11 @@ git push origin main
 
 Si revisamos en la pestaña "**Actions**", empezará nuestro despliegue.
 
-![](../../.gitbook/assets/screen-shot-2021-03-03-at-10.34.51-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-03-03-at-10.34.51-pm.png)
 
 Cuando todo el despligue funcione bien, vamos a ver que todos los checks de los jobs funcionen perfectamente.
 
-![](../../.gitbook/assets/screen-shot-2021-03-03-at-10.52.36-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-03-03-at-10.52.36-pm.png)
 
 Una vez terminen los jobs podemos revisar nuestra página:
 
@@ -2692,7 +2692,7 @@ Una vez terminen los jobs podemos revisar nuestra página:
 
 La URL sigue la siguiente estructura: `https://<user>.github.io/<repository>`.
 
-![](../../.gitbook/assets/screen-shot-2021-03-03-at-11.54.08-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-03-03-at-11.54.08-pm.png)
 
 {% hint style="info" %}
 Recuerda cada vez que hagas cambios en tu proyecto, haces commit y push a 'main' o tu rama por defecto, la que hayas configurado en el 'on', para reflejar los cambios en nuestra página.
