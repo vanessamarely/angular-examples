@@ -26,9 +26,13 @@ Lo mejor es que podrás personalizar tu tablero y hacer volar tu imaginación pa
 
      2. Creando el Kanban Board
 
+Para el proyecto vamos a emplear varios conceptos básicos de Angular, iniciaremos hablando de un poco de arquitectura, los componentes. Usaremos Angular material, algunos de sus componentes y tambien haremos uso del CDK.
 
+Lo ideal es lograr hacer una aplicación como esta, aunque tú la puedes hacer más bonita.
 
+![](../../.gitbook/assets/screen-shot-2021-03-04-at-9.48.27-am.png)
 
+![](../../.gitbook/assets/kanban.gif)
 
 
 
