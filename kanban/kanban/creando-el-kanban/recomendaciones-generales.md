@@ -1,3 +1,10 @@
+---
+description: >-
+  Crear una aplicación con las mejores prácticas y metodologías es nuestro
+  objetivo, pero sobre la marcha vamos a ir aprendiendo sobre ellas, para
+  implementarlas en nuestra aplicación.
+---
+
 # Recomendaciones Generales
 
 Existen muchas formas de personalizar nuestra aplicación. Este tablero lo puedes personalizar tanto como quieras, puedes localmente incluso incluir el localStorage o crear tus propios servicios, para prevenir que al recargar la página pierdas la información, pero no es una persistencia real.
