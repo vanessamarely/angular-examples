@@ -2554,3 +2554,149 @@ getPrioritiesTask(PriorityType: string): void {
 ...
 ```
 
+## Extra
+
+Es muy importante poder hacer el despliegue de nuestra aplicación, creamos muchas demos, pero no siempre las desplegamos, y aveces no contamos con un dominio, o un hosting. Con github ahora podemos desplegar nuestra aplicación con github actions y tener un dominio y hosting de nuestros archivos con github pages.
+
+### GitHub Pages o Páginas de GitHub
+
+Es un servicio de alojamiento de nuestros proyectos; podemos alojar nuestros archivos HTML, CSS y Javascript. Cuando creamos nuestra aplicación en un framework como angular estos ficheros los generamos ejecutando el siguiente comando:
+
+```bash
+ng build
+```
+
+En algunas ocasiones podemos obtener algún error generando nuestra carpeta dist, que es la que contendra todo nuestro proyecto, usando el siguiente comando podemos solucionarlo o solo instalando de nuevo el npm o yarn.
+
+```bash
+npm i --only=dev
+```
+
+Al generar nuestra carpeta dist, el contenido que se genera es el que podemos publicar en nuestro GitHub pages.
+
+### GitHub Actions o Acciones de GitHub
+
+Nos permite automatizar, personalizar y ejecutar el flujo de trabajo de nuestro proyecto para subirlo en un repositorio con GitHub actions.
+
+![](../../.gitbook/assets/screen-shot-2021-03-03-at-11.20.11-pm.png)
+
+### Como despliego mi aplicación?
+
+Teniendo nuestra aplicación creada, y en nuestro repositorio de github, vamos a crear una rama con el nombre: **gh-pages**. Esta rama es la que configuramos para subir nuestros archivos de HTML, CSS y Javascript, que es la aplicación que quedará publicada.
+
+![](../../.gitbook/assets/screen-shot-2021-03-03-at-10.00.13-pm.png)
+
+Podemos crear nuestra rama directamente desde la página de GitHub o podemos desde nuestra terminal crear nuestra rama. La idea de esta rama es que este vacia, entonces es necesario limpiarla, para eso odemos hacer lo siguiente si hemos creado nuestro repo desde la web:
+
+```bash
+git fetch origin gh-pages
+git checkout gh-pages
+git rm -rf .
+
+
+git add .
+git commit -m "cleanup"
+git push
+```
+
+Tenemos nuestra rama lista!!
+
+Vamos a incluir un script en nuestro package.json  en nuestra rama  "**main**"
+
+Vamos a nuestra rama main
+
+```bash
+git checkout main
+```
+
+En la sección de scripts de nuestro archivo vamos a incluir lo siguiente:
+
+```javascript
+ "deploy": "ng build --prod --base-href=/angular-kanban-workshop/"
+```
+
+La dirección base tendrá el nombre de nuestro repositorio`--base-href=/<repository>/"` .
+
+Vamo a guardar nuestro cambios, hacemos un commit y un push a nuestro repositorio main
+
+```javascript
+git commit -m "deploy script"
+git push origin main
+```
+
+Estamos a pocos pasos de nuestro despliegue.
+
+Si vamos a la pestaña de GitHub action en nuestro repositorio de GitHub, podemos ver varias plantillas para hacer el despliegue. Es bueno usar las opciones, pero vamos a crear nuestra plantilla manual.
+
+* Primero vamos a crear en uestro proyecto, en la raiz una carpeta llamada: "_**.github**_".
+* Dentro de la carpeta "_**.github**_" vamos a crear otra carpeta llamada: "_**workflows**_"
+* Dentro de la carpeta crearemos un archivo llamada _**build-deploy.yml**_
+* En el archivo es donde hacemos la configuración, le decimos a GitHub que pasos debe seguir para hacer el despliegue de nuestra aplicación.
+
+```yaml
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Build
+        run: |
+          npm install
+          npm run-script deploy
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist/workshop
+```
+
+* En este archivo en el on: en branches debemos colocar el nombre de nuestra rama por defecto: **main**
+* En los jobs, en la parte del name para el branch debe ir gh-pages y en el folder se coloca el nombre de la carpeta que se genera dentro de la carpeta **dist**, en este caso sera: **workshop**
+
+Guardamos nuestro archivo, hacemos un commit y un push
+
+```yaml
+git add .
+git commit -m "build & deploy"
+git push origin main
+```
+
+Si revisamos en la pestaña "**Actions**", empezará nuestro despliegue.
+
+![](../../.gitbook/assets/screen-shot-2021-03-03-at-10.34.51-pm.png)
+
+Cuando todo el despligue funcione bien, vamos a ver que todos los checks de los jobs funcionen perfectamente.
+
+![](../../.gitbook/assets/screen-shot-2021-03-03-at-10.52.36-pm.png)
+
+Una vez terminen los jobs podemos revisar nuestra página:
+
+{% embed url="https://vanessamarely.github.io/angular-kanban-workshop/" %}
+
+La URL sigue la siguiente estructura: `https://<user>.github.io/<repository>`.
+
+![](../../.gitbook/assets/screen-shot-2021-03-03-at-11.54.08-pm.png)
+
+{% hint style="info" %}
+Recuerda cada vez que hagas cambios en tu proyecto, haces commit y push a 'main' o tu rama por defecto, la que hayas configurado en el 'on', para reflejar los cambios en nuestra página.
+{% endhint %}
+
+
+
