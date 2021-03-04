@@ -30,19 +30,21 @@ cuando estamos creando nuestra aplicación podemos ubicar los tres tipos de comp
 
 Container \(Contenedor\)     -&gt;        Layout \(Diseño\)      -&gt;     Presentational \(Presentación\)
 
-![](../../../.gitbook/assets/presentacionl1.png)
+![](../../../.gitbook/assets/slidespng_mesa-de-trabajo-1-copia-2.png)
 
-Entre el contenedor y el componente de presentación una forma de compartir la data es mediante Input y Outputs.
+Entre el contenedor y el componente de presentación, una forma de compartir la data es mediante Input y Outputs.
 
-![](../../../.gitbook/assets/presentacionl2.png)
+![](../../../.gitbook/assets/slidespng_mesa-de-trabajo-1-copia-3.png)
 
-![](../../../.gitbook/assets/presentacionl3.png)
+Un contenedor puede ser un componente padre, pero tambien un componente presentacional podría serlo, sin modificar el estado y solo compartiendo la información con sus hijos que viene desde un padre contenedor.
+
+![](../../../.gitbook/assets/slidespng_mesa-de-trabajo-1-copia-4.png)
 
 El Input nos permite pasar una data como entrada a nuestro componente, comúnmente la usamos para pasar data entre padres a hijos, si necesitáramos pasar desde el hijo al padre, usaríamos el Output.
 
 La data viene de una petición como por el HttpClient, una Store \(NgrX\), o una ruta y todo va al contenedor, esas diferentes fuentes van al contenedor y este hace lo que requiere el estado y lo pasa al componente presentacional, para renderizar lo que se necesita. 
 
-![](../../../.gitbook/assets/screen-shot-2021-02-23-at-10.02.21-pm.png)
+![](../../../.gitbook/assets/slidespng_mesa-de-trabajo-1-copia-5.png)
 
 Son dos componentes los importantes uno en mostrar el contenido y el otro de manejar la data.
 
@@ -66,11 +68,11 @@ Con el Input y Output tenemos una buena comunicación entre los componentes, per
 
 * Event Bus. Es un patrón mediador, el servicio actúa como un intermediario entre los componentes. Los componentes no saben de donde viene la data y es débilmente acoplado. Se basa en Subject/observable.
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-7.19.37-pm.png)
+![](../../../.gitbook/assets/slidespng_mesa-de-trabajo-1-copia-6.png)
 
 * Observable service. Proviene del patrón Observer. El servicio expone un observable directamente a los componentes. Los componentes saben de donde proviene la data, no es débilmente acoplado como el Event bus. Se basa en Subjects/observable.
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-7.17.57-pm.png)
+![](../../../.gitbook/assets/slidespng_mesa-de-trabajo-1-copia-7.png)
 
 {% hint style="info" %}
 **RxJS** es una librería de programación reactiva, basada en eventos a través de secuencias de observables.
@@ -80,19 +82,19 @@ Con el Input y Output tenemos una buena comunicación entre los componentes, per
 
 * Subject. Los subject proporcionan una manera de enviar uno a más datos a los oyentes. Estos oyentes están subscritos y obtiene la información. En el caso de haber nuevos subscriptores estos no obtendrán la data que se paso antes a los oyentes, solo los nuevos obtienen la data que se está transmitiendo desde el momento de la subscripción.
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.42.49-pm.png)
+![](../../../.gitbook/assets/slides_mesa-de-trabajo-1-copia-8.png)
 
 * BehaviorSubject. Es muy similar a los subject, con la diferencia que los nuevos suscriptores pueden obtener la última información que se haya pasado previamente a su subscripción. 
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.46.03-pm.png)
+![](../../../.gitbook/assets/slides_mesa-de-trabajo-1-copia-9.png)
 
 * ReplaySubject. Este es una especia de BehaviorSubject, este puede repetir el ultimo valor que haya sido pasado al momento de la suscripción e incluso se puede configurar si se desea pasar valores anteriores. 
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.49.06-pm.png)
+![](../../../.gitbook/assets/slides_mesa-de-trabajo-1-copia-10.png)
 
 * AsyncSubject. Este es diferente a los demás, con el se pasa el valor más actualizado
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.51.11-pm.png)
+![](../../../.gitbook/assets/slides_mesa-de-trabajo-1-copia-11.png)
 
 ###  Porqué necesitamos un estado?
 

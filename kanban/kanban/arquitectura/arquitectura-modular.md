@@ -60,9 +60,9 @@ Este proyecto será local en nuestra maquina, no haremos un despliegue así que 
 
 Teniendo en cuenta nuestro features lo principal de nuestra aplicación seria la siguiente estructura:
 
-![](../../../.gitbook/assets/example.png)
+![](../../../.gitbook/assets/slides_mesa-de-trabajo-1-copia-12.png)
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-2.12.05-pm.png)
+![](../../../.gitbook/assets/slides_mesa-de-trabajo-10_mesa-de-trabajo-10.png)
 
 
 

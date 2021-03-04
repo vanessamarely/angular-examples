@@ -7,7 +7,7 @@ description: >-
 
 # Arquitectura
 
-![](../../../.gitbook/assets/screen-shot-2021-02-27-at-6.02.59-pm.png)
+![](../../../.gitbook/assets/slidespng_mesa-de-trabajo-1.png)
 
 Según la documentación oficial de Angular, la arquitectura de una aplicación en Angular, se basa en ciertos conceptos fundamentales. Los bloques de construcción básicos del marco angular son componentes angulares que están organizados en NgModules. 
 
@@ -17,7 +17,7 @@ Siguiendo este marco de Angular hay unos conceptos básicos que es fundamental a
 
 Basado en ese marco inicial, en la página oficial podemos encontrar un diagrama, que enseña cómo se relacionan estas piezas básicas y de esta forma vamos armando nuestro rompecabezas o nuestra aplicación de legos.
 
-![](../../../.gitbook/assets/68747470733a2f2f616e67756c61722e696f2f67656e6572617465642f696d616765732f67756964652f6172636869746563747572652f6f76657276696577322e706e67.png)
+![](../../../.gitbook/assets/slidespng_mesa-de-trabajo-1-copia.png)
 
 Los conceptos claves de la arquitectura en Angular son:
 
