@@ -32,6 +32,8 @@ Lo ideal es lograr hacer una aplicación como esta, aunque tú la puedes hacer m
 
 ![](../../.gitbook/assets/screen-shot-2021-03-04-at-9.48.27-am.png)
 
+Con el board y algunas funcionalidades que haremos así lucirá:
+
 ![](../../.gitbook/assets/kanban.gif)
 
 
