@@ -2698,5 +2698,15 @@ La URL sigue la siguiente estructura: `https://<user>.github.io/<repository>`.
 Recuerda cada vez que hagas cambios en tu proyecto, haces commit y push a 'main' o tu rama por defecto, la que hayas configurado en el 'on', para reflejar los cambios en nuestra página.
 {% endhint %}
 
+## Repositorio
+
+Esta es la url de mi repositorio
+
+{% embed url="https://github.com/vanessamarely/angular-kanban-workshop" %}
+
+{% file src="../../../.gitbook/assets/kanbab-board-vanessa-aristizabal.pdf" caption="Slides de la presentación" %}
+
+
+
 
 
