@@ -32,7 +32,7 @@ Comúnmente se tienen los siguientes módulos en las aplicaciones:
 
 * **Core**: El CoreModule, asume el rol de AppModule raíz, tendrá aquellos componentes universales y otras características donde solo hay una instancia por aplicación, servicios Singleton, entre otros. En el caso de tener algún servicio que solo un feature vaya a hacer uso de él, es recomendable tenerlo solo en el feature. Algunos equipos llaman a este feature "Common", y no importa que tenga otro nombre, lo importante es que cumpla la responsabilidad propia del "Core" feature.
 * **Share**: El SharedModule es donde deben ir todos los componentes, pipes/filters y directivas compartidas en nuestra aplicación. El SharedModule se puede importar en cualquier otro módulo cuando esos elementos se reutilicen. El módulo compartido no debería depender del resto de la aplicación y, por lo tanto, no debería depender de ningún otro módulo.
-* **Feature**: Para aquellos componentes que realizan una funcionalidad especifica en el proyecto.
+* **Feature**: Para aquellos componentes que realizan una funcionalidad específica en el proyecto.
 
 En la documentación de Angular, podemos ver un ejemplo sencillo del uso de los modelos mencionados:
 
