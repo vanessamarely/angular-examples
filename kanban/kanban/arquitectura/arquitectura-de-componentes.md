@@ -125,7 +125,25 @@ Tenemos varias opciones para responder a nuestras preguntas anteriores.
 * Router o Enrutamiento. Almacena la persistencia de la data, permitiendo que exista en una sesión y también permite compartir paginas o rutas. En el enrutamiento podemos compartir parámetros que usaremos a través de la aplicación.
 * Estado del componente. Smart component se encarga de manejar todo el estado.
 
-#### State Mangement
+#### State Management
+
+Depende del desarrollo de nuestra aplicación, podemos optar por esta opción de necesitar un _**State Management**_. Los objetivos de este son:
+
+* Una sola fuente de verdad
+* Predecible
+* Inmutable
+* Seguimiento a los cambios
+
+Para manejar el estado existen varios opciones:
+
+* Servicios. Es un buen punto de entrada para manejar el estado de la aplicación. Desde la documentación oficial un servicio es una clase con un propósito limitado y bien definido. Puede ayudarnos para la comunicación del flujo de datos de una forma sencilla.
+* NgRx
+* ngrx-data. Extension de la funcionalidad de NgRX
+* Observable Store.
+* Akita
+* Ngxs
+* Mobx
+* Entre otras.
 
 
 
