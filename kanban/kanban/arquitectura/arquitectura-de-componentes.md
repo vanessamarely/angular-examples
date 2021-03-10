@@ -125,6 +125,10 @@ Tenemos varias opciones para responder a nuestras preguntas anteriores.
 * Router o Enrutamiento. Almacena la persistencia de la data, permitiendo que exista en una sesión y también permite compartir paginas o rutas. En el enrutamiento podemos compartir parámetros que usaremos a través de la aplicación.
 * Estado del componente. Smart component se encarga de manejar todo el estado.
 
+#### State Mangement
+
+
+
 ### Cómo definimos la arquitectura de nuestra aplicación?
 
 * Analiza los requerimientos. Necesitamos hacer un análisis de lo que se desea hacer, es posible que nuestra aplicación crezca y se deba reestructurar, pero de los requerimientos actuales se debe pensar en crear código, que no posea mucha complejidad, que se pueda escalar y que los nuevos integrantes del equipo puedan entender, para que sean participes activos de la aplicación.
