@@ -116,7 +116,7 @@ El estado de la página es lo que solo es necesario en la página.
 
 En este punto llega un gran interrogante, como saber cual debemos usar o como debemos poner la data?
 
-Y debemos hacer una análisis del diseño de nuestra aplicación en este punto nos preguntamos, debo compartir la data en toda la aplicación?, la necesito en ciertas páginas?, cuanto debe durar la persistencia de la data? la comparto en una sesión o debe ser en multiples? 
+Y debemos hacer una análisis del diseño de nuestra aplicación en este punto nos preguntamos, debo compartir la data en toda la aplicación?, la necesito en ciertas páginas?, cuanto debe durar la persistencia de la data? la comparto en una sesión o debe ser en múltiples? 
 
 Tenemos varias opciones para responder a nuestras preguntas anteriores.
 
