@@ -136,13 +136,43 @@ Depende del desarrollo de nuestra aplicación, podemos optar por esta opción de
 
 Para manejar el estado existen varios opciones:
 
-* Servicios. Es un buen punto de entrada para manejar el estado de la aplicación. Desde la documentación oficial un servicio es una clase con un propósito limitado y bien definido. Puede ayudarnos para la comunicación del flujo de datos de una forma sencilla.
-* NgRx
-* ngrx-data. Extension de la funcionalidad de NgRX
-* Observable Store.
-* Akita
-* Ngxs
-* Mobx
+* **Servicios**. Es un buen punto de entrada para manejar el estado de la aplicación. Desde la documentación oficial un servicio es una clase con un propósito limitado y bien definido. Puede ayudarnos para la comunicación del flujo de datos de una forma sencilla. Los podemos incluir mediante la inyección de dependencias en donde los necesitemos y podemos proveer notificaciones usando los Subjects, es fácil de mantener y realizar una simple petición al servidor. Pero cuando la aplicación empieza a crecer y ser un poco más robusta, podemos continuar usando los servicios, pero es necesario centralizar la información en un _**Sto**_**re**.Los servicios se comunican con la Store y de esta forma se garantiza la comunicación con el estado. 
+
+![](../../../.gitbook/assets/screen-shot-2021-03-10-at-8.37.04-pm.png)
+
+* **NgRx Store**. provee un manejo del estado reactivo para las aplicaciones de Angular, inspirado por Redux. Unifica los eventos en la aplicación y dirige el estado usando RxJS. 
+
+{% hint style="info" %}
+**Redux + RxJS = NgRx**
+{% endhint %}
+
+-- Provee una sola fuente de verdad para el estado. 
+
+-- Provee datos inmutables, los datos no van a mutar o cambiar en multiples lugares a través de la aplicación. 
+
+-- Provee una consistencia a través del equipo de desarrolladores y podemos tener una buena experiencia en el debugging de la app.
+
+En NgRX tendremos una Store, que será responsable por el almacenamiento del estado de la aplicación, puede ser cualquier tipo de estado \(Estado de la aplicación, estado de la sesión, o estado de la entidad\). 
+
+Para interactuar con el Store y el estado se tienen **Acciones**, las acciones se pasan a los **Reducers**, que son básicamente traductores que toman las acciones, actúan sobre ellos y luego interactúan con el store del estado. Para obtener esa data en nuestro componente, tenemos los **Selectores** \(**Selectors$**\). 
+
+Para obtener la data del servidor, el **componente** llama a una acción, que dispara un **Effect**, que luego se integra al **servidor** y obtiene la data de él. Cuando el E**ffect**, obtiene la data de regreso, envía la acción correspondiente \(**Action**\), va al **Reducer**, el cual actualiza la data del S**tore**, y luego el selector obtiene esa data de regreso al **Componente**.
+
+![](../../../.gitbook/assets/ngrx.gif)
+
+Usar NgRx es muy útil en nuestras aplicaciones añade un poco más de complejidad y más código, pero sí se define bien el patrón es bueno para el equipo y para el proyecto a futuro. Tiene una pequeña curva de aprendizaje
+
+* **ngrx-data**. Extension de la funcionalidad de NgRX. Ofrece una suave introducción a ngrx/redux sin el boilerplate. Simplifica el NgRx. 
+
+![](../../../.gitbook/assets/ngrx2.gif)
+
+* **Observable Store**. Provee una forma de administrar el estado de nuestra aplicación, mientras se logran muchos de los objetivos que ofrecen otros state management complejos. Entre los objetivos de este Observable Store, esta el ser una sola fuente de verdad, el estado es solo de lectura e inmutable, provee notificaciones del cambio de estado a los subscriptores; también tiene la posibilidad de hacer un seguimiento al historial del cambio de estado y por ultimo una minima cantidad de código es requerida. Trabaja con cualquier librería. 
+
+![](../../../.gitbook/assets/screen-shot-2021-03-10-at-9.19.04-pm.png)
+
+* **Akita**
+* **Ngxs**
+* **Mobx**
 * Entre otras.
 
 
