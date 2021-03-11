@@ -12,7 +12,7 @@ Adicional a las consideraciones ya mencionadas es bueno también considerar lo s
 
 **Accesibilidad**. Es importante hacer accesible nuestra aplicación a todos y esto  nos ayuda a considerar más aspectos.
 
-**i18n**. La internacionalización es un aspecto que puede afectar enormemente tu aplicación, porque es bueno considerar si se desea que este en varios lenguajes y esto implica analiza que herramientas vamos a usar y cómo estructurar el proyecto. 
+**i18n**. La internacionalización es un aspecto que puede afectar enormemente tu aplicación, porque es bueno considerar si se desea que este en varios lenguajes y esto implica analizar qué herramientas vamos a usar y cómo estructurar el proyecto. 
 
 **Ambientes o Environments**. Vamos a mover nuestra aplicación en diferentes ambientes.
 
@@ -20,15 +20,15 @@ Adicional a las consideraciones ya mencionadas es bueno también considerar lo s
 
 **CDN, contenedor, servidor**. Como realizaremos el despliegue de nuestra aplicación, usaremos Docker o un contenedor. Esta parte no afecta tal vez mucho nuestro código, pero sí es bueno saber que otras herramientas usaremos para que nuestro producto sea usado.
 
-**Unit testing o pruebas unitarias**. que herramientas vamos a usar, vamos a usar karma. 
+**Unit testing o pruebas unitarias**. Qué herramientas vamos a usar, vamos a usar karma. 
 
-**End-to-End testing**. ****Se va a usar Cypress o Protactor. Este podría afectar un poco el código en cuanto a que se deben tomar algunas decisiones como si se van a usar Ids o las etiquetas, para hacer las pruebas.
+**End-to-End testing**. ****Se va a usar Cypress o Protactor. Esto podría afectar un poco el código en cuanto a que se deben tomar algunas decisiones como si se van a usar Ids o las etiquetas, para hacer las pruebas.
 
 **API**. En este punto se tiene en cuenta el punto de vista de backend, para definir algunos verbos que se van a usar, la seguridad.
 
 Se pueden considerar más aspectos, los que requieras o tu equipo. 
 
-Crear una plantilla, de los puntos claves a definir en cada proyecto, nos ayuda a ahorrar tiempo para no tener que volver a pensar en cuales son los principales aspectos que debemos considerar a la hora de iniciar la arquitectura.
+Crear una plantilla, de los puntos claves a definir en cada proyecto, nos ayuda a ahorrar tiempo para no tener que volver a pensar en cuáles son los principales aspectos que debemos considerar a la hora de iniciar la arquitectura.
 
 
 
