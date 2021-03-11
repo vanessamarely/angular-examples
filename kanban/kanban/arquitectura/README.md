@@ -33,7 +33,7 @@ Podemos usar esos conceptos o alguno de ellos,  para crear una aplicación con u
 
 No hay una única forma de crear la arquitectura de nuestra Aplicación, pero lo más importante es KISS, y no me refiero a una banda de rock.
 
-"Keep It Simple, Stupid" ó "Mantenerlo Simple" \(La ultima palabra sobra en su traducción\)
+"Keep It Simple, Stupid" ó "Mantenerlo Simple" \(La última palabra sobra en su traducción\)
 
 La idea de este principio es crear soluciones que nosotros y otros puedan entender.
 
