@@ -7,7 +7,7 @@ description: >-
 
 # Guía de estilos
 
-Teniendo en cuenta los conceptos básicos, la guía de estilos de Angular  nos da una pauta para convenciones, nombramientos, buenas practicas y patrones que es importante conocer y seguir las recomendaciones que la guía nos enseña, para crear buenas aplicaciones.
+Teniendo en cuenta los conceptos básicos, la guía de estilos de Angular  nos da una pauta para convenciones, nombramientos, buenas prácticas y patrones que es importante conocer y seguir las recomendaciones que la guía nos enseña, para crear buenas aplicaciones.
 
 Podemos encontrar la guía en la siguiente url: [https://angular.io/guide/styleguide](https://angular.io/guide/styleguide)
 
