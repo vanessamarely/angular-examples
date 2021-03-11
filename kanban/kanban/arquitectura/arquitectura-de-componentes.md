@@ -6,7 +6,7 @@ description: >-
 
 # Arquitectura de Componentes
 
-La mayoría de aplicaciones que construimos no son paginas estáticas, hay un estado y hay diferentes tipos de componentes donde el estado podría vivir. 
+La mayoría de aplicaciones que construimos no son páginas estáticas, hay un estado y hay diferentes tipos de componentes donde el estado podría vivir. 
 
 ### Tipos de Componentes
 
