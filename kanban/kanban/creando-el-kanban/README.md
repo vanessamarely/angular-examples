@@ -2659,7 +2659,7 @@ En la sección de scripts de nuestro archivo vamos a incluir lo siguiente:
 
 La dirección base tendrá el nombre de nuestro repositorio`--base-href=/<repository>/"` .
 
-Vamo a guardar nuestro cambios, hacemos un commit y un push a nuestro repositorio main
+Vamos a guardar nuestro cambios, hacemos un commit y un push a nuestro repositorio main
 
 ```javascript
 git commit -m "deploy script"
