@@ -22,7 +22,7 @@ Adicional a las consideraciones ya mencionadas es bueno también considerar lo s
 
 **Unit testing o pruebas unitarias**. Qué herramientas vamos a usar, vamos a usar karma. 
 
-**End-to-End testing**. ****Se va a usar Cypress o Protactor. Esto podría afectar un poco el código en cuanto a que se deben tomar algunas decisiones como si se van a usar Ids o las etiquetas, para hacer las pruebas.
+**End-to-End testing**. ****Se va a usar Cypress. Esto podría afectar un poco el código en cuanto a que se deben tomar algunas decisiones como si se van a usar Ids o las etiquetas, para hacer las pruebas.
 
 **API**. En este punto se tiene en cuenta el punto de vista de backend, para definir algunos verbos que se van a usar, la seguridad.
 
