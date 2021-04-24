@@ -1,6 +1,6 @@
 ---
 description: >-
-  Nuestras aplicaciones esta llenas de componentes y ayuda mucho pensar en como
+  Nuestras aplicaciones esta llenas de componentes y ayuda mucho pensar en cómo
   queremos estructurarlos para pensar en la arquitectura de ellos.
 ---
 
