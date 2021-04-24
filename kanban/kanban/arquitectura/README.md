@@ -51,9 +51,17 @@ Tips alusivos de este principio son:
 * **Evitar la duplicidad**.  ****Es recomendable que cuando veas código duplicado crees una solución reusable de ello, es bueno evitar copiar y pegar el código en diferentes lugares para ahorrar tiempo.
 * Aplicar más principios. Como el principio **SOLID**. 
 
+**SOLID**:
+
+* S – Single Responsibility Principle \(SRP\)
+* O – Open/Closed Principle \(OCP\)
+* L – Liskov Substitution Principle \(LSP\)
+* I – Interface Segregation Principle \(ISP\)
+* D – Dependency Inversion Principle \(DIP\)
+
 ### Aspectos a considerar en la Arquitectura
 
-**Antes de construir una aplicación debemos pensar en ciertos aspectos importantes que son necesarios, e incluso hablando desde un rol diferente a desarrolladores, como arquitectos de un edificio, debemos seguir los planos; pero en una aplicación no tenemos un único plano para construir nuestra aplicación de esa forma.**  
+Antes de construir una aplicación debemos pensar en ciertos aspectos importantes que son necesarios, e incluso hablando desde un rol diferente a desarrolladores, como arquitectos de un edificio, debemos seguir los planos; pero en una aplicación no tenemos un único plano para construir nuestra aplicación de esa forma.  
 
 Pero es importante tener en cuenta lo siguiente:
 
