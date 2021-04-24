@@ -1,6 +1,6 @@
 ---
 description: >-
-  Una aplicación de Angular es un conjunto de legos juntos, y hay diferentes
+  Una aplicación de Angular es un conjunto de legos unidos, que tiene diferentes
   técnicas que  nos permiten usar la arquitectura. Esos legos son los bloques de
   construcción de Angular.
 ---
