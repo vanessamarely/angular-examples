@@ -2670,7 +2670,7 @@ Estamos a pocos pasos de nuestro despliegue.
 
 Si vamos a la pestaña de GitHub action en nuestro repositorio de GitHub, podemos ver varias plantillas para hacer el despliegue. Es bueno usar las opciones, pero vamos a crear nuestra plantilla manual.
 
-* Primero vamos a crear en uestro proyecto, en la raiz una carpeta llamada: "_**.github**_".
+* Primero vamos a crear en nuestro proyecto, en la raiz una carpeta llamada: "_**.github**_".
 * Dentro de la carpeta "_**.github**_" vamos a crear otra carpeta llamada: "_**workflows**_"
 * Dentro de la carpeta crearemos un archivo llamada _**build-deploy.yml**_
 * En el archivo es donde hacemos la configuración, le decimos a GitHub que pasos debe seguir para hacer el despliegue de nuestra aplicación.
